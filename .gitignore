@@ -1,0 +1,11 @@
+/.build/
+/source/social/
+/node_modules/
+/tmp/
+/local-runtime/
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

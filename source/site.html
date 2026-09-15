@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<!-- Editable design source. Run node website/source/build.mjs after edits. See ../LOCAL-REVIEW.md and ../implementation/DEPLOYMENT.md. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Wayne Falbey — The Sleeping Dogs Thrillers</title>
+<meta name="description" content="The official site of John Wayne Falbey, internationally bestselling author of the Sleeping Dogs techno-political thriller series. Eight novels. The ninth arrives November 2026.">
+<meta property="og:title" content="John Wayne Falbey — The Sleeping Dogs Thrillers">
+<meta property="og:description" content="Nature built them to survive. The government trained them to kill. Then tried to destroy them. Bad move.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sleepingdogs.netlify.app/">
+<meta property="og:image" content="https://sleepingdogs.netlify.app/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sleepingdogs.netlify.app/og-card.png">
+<link rel="canonical" href="https://sleepingdogs.netlify.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0d12'/%3E%3Cpath d='M16 3 L18.5 13.5 L29 16 L18.5 18.5 L16 29 L13.5 18.5 L3 16 L13.5 13.5 Z' fill='%23c8a44d'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='%23d1452f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<noscript><style>.view{display:block!important}</style></noscript>
+<style>
+:root{
+  --void:#0a0d12;
+  --slate:#121821;
+  --slate-2:#18202b;
+  --line:rgba(255,255,255,.09);
+  --line-lit:rgba(255,255,255,.17);
+  --glass:rgba(255,255,255,.035);
+  --glass-2:rgba(255,255,255,.06);
+  --text:#e9eaee;
+  --muted:#b8c1cb;
+  --dim:#9aa4b0;
+  --brass:#c8a44d;
+  --brass-lit:#e8cd8a;
+  --oxide:#d1452f;
+  --manila:#ddd3b4;
+  --marble:#ece7db;
+  --paper-ink:#3a3423;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  --disp:'Instrument Serif',Georgia,serif;
+  --sans:'Inter Tight',system-ui,-apple-system,sans-serif;
+  --r:16px;
+  --r-sm:10px;
+  --pad:clamp(20px,5vw,64px);
+  --maxw:1240px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1!important;transform:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;animation-delay:0s!important;transition-delay:0s!important}
+}
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:17.5px;
+  font-weight:400;
+  line-height:1.6;
+  letter-spacing:-.005em;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:4px}
+::selection{background:var(--oxide);color:#fff}
+
+/* ---------- ambient texture ---------- */
+.grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.05;mix-blend-mode:overlay}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%,transparent 40%,rgba(0,0,0,.55) 100%)}
+
+/* ---------- scroll progress ---------- */
+.prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:9999;
+  background:linear-gradient(90deg,var(--oxide),var(--brass));box-shadow:0 0 14px rgba(200,164,77,.6)}
+
+/* ---------- status bar ---------- */
+.statusbar{
+  position:relative;z-index:60;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:9px var(--pad);border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+  background:rgba(10,13,18,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.statusbar b{color:var(--brass);font-weight:400}
+.livedot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--brass);
+  margin-right:7px;vertical-align:1px;box-shadow:0 0 0 0 rgba(200,164,77,.7);animation:ping 2.6s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(200,164,77,.55)}70%{box-shadow:0 0 0 7px rgba(200,164,77,0)}100%{box-shadow:0 0 0 0 rgba(200,164,77,0)}}
+@media(max-width:760px){.statusbar span.hide-s{display:none}}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:70;
+  background:rgba(10,13,18,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  border-bottom:1px solid transparent;transition:border-color .3s,padding .3s;
+}
+.nav.stuck{border-bottom-color:var(--line)}
+  .nav.menu-open{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,13,18,.985)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:16px var(--pad);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;transition:padding .3s}
+.nav.stuck .nav-in{padding-top:11px;padding-bottom:11px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-size:21px;letter-spacing:.01em;white-space:nowrap}
+.brand .mark{width:26px;height:26px;flex:none}
+.brand i{font-style:normal;color:var(--muted);font-size:15px;letter-spacing:.16em;text-transform:uppercase;font-family:var(--mono)}
+@media(max-width:520px){.brand i{display:none}}
+.links{display:flex;align-items:center;gap:4px;list-style:none}
+.links a{
+  display:block;padding:9px 14px;border-radius:999px;
+  font-size:12.5px;letter-spacing:.05em;color:var(--muted);font-weight:400;
+  transition:color .2s,background .2s;
+}
+.links a:hover{color:var(--text);background:var(--glass)}
+.links a.on{color:var(--void);background:var(--brass);font-weight:500}
+.burger{display:none;width:42px;height:38px;border:1px solid var(--line);background:var(--glass);
+  border-radius:10px;color:var(--text);cursor:pointer;align-items:center;justify-content:center}
+.burger span{display:block;width:16px;height:1.5px;background:currentColor;position:relative}
+.burger span::before,.burger span::after{content:'';position:absolute;left:0;width:16px;height:1.5px;background:currentColor}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+@media(max-width:900px){
+  .burger{display:flex}
+  .links{position:fixed;inset:0;z-index:80;display:none;flex-direction:column;justify-content:center;gap:6px;
+    padding:68px var(--pad) 28px;overflow-y:auto;justify-content:safe center;background:rgba(10,13,18,.97);backdrop-filter:blur(20px)}
+  .links.open{display:flex}
+  .links a{padding:16px 18px;font-size:22px;font-family:var(--disp);letter-spacing:0;border-radius:12px}
+  .links a.on{background:var(--glass-2);color:var(--brass)}
+  .links .closer{position:absolute;top:18px;right:var(--pad);font-family:var(--mono);font-size:12px;
+    letter-spacing:.18em;color:var(--muted);cursor:pointer;padding:10px}
+}
+@media(min-width:901px){.links .closer{display:none}}
+
+/* ---------- view routing ---------- */
+.view{display:none}
+.view.on{display:block;animation:viewin .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes viewin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- reveal ---------- */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- shell ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.band{padding-top:clamp(64px,9vw,120px);padding-bottom:clamp(64px,9vw,120px)}
+.band-t{padding-top:clamp(40px,6vw,72px)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:clamp(620px,92svh,940px);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:-8% 0 0;z-index:0}
+.hero-bg img{width:100%;height:112%;object-fit:cover;object-position:50% 42%;
+  filter:saturate(.72) contrast(1.06) brightness(.62);animation:drift 38s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.04)}to{transform:scale(1.14)}}
+.hero-scrim{position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg,rgba(10,13,18,.86) 0%,rgba(10,13,18,.22) 26%,rgba(10,13,18,.72) 66%,var(--void) 99%),
+    radial-gradient(75% 60% at 18% 74%,rgba(10,13,18,.78),transparent 70%);
+}
+.hero-grid{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(147,160,176,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(147,160,176,.09) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(70% 70% at 70% 40%,#000,transparent 78%);
+  mask-image:radial-gradient(70% 70% at 70% 40%,#000,transparent 78%)}
+.hero-in{position:relative;z-index:4;max-width:var(--maxw);margin:0 auto;width:100%;
+  padding:0 var(--pad) clamp(40px,6vw,76px)}
+
+/* radar */
+.radar{position:absolute;z-index:3;top:46%;right:max(-160px,-6vw);transform:translateY(-50%);
+  width:min(640px,58vw);aspect-ratio:1;pointer-events:none;opacity:.9}
+.radar svg{position:absolute;inset:0;width:100%;height:100%}
+.radar .sweep{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(200,164,77,.26),rgba(200,164,77,.05) 46deg,transparent 66deg);
+  animation:spin 8s linear infinite;
+  -webkit-mask-image:radial-gradient(circle,#000 62%,transparent 63%);
+  mask-image:radial-gradient(circle,#000 62%,transparent 63%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--oxide);
+  box-shadow:0 0 12px 2px rgba(209,69,47,.7)}
+.blip::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(209,69,47,.65);
+  animation:blipring 3.2s ease-out infinite}
+.blip.b2{background:var(--brass);box-shadow:0 0 12px 2px rgba(200,164,77,.7);left:39%;top:57%}
+.blip.b2::after{border-color:rgba(200,164,77,.6);animation-delay:1.1s}
+.blip.b1{left:57%;top:32%}
+.blip.b3{left:69%;top:48%}
+.blip.b3::after{animation-delay:2.2s}
+@keyframes blipring{0%{transform:scale(1);opacity:.9}100%{transform:scale(4);opacity:0}}
+@media(max-width:900px){.radar{opacity:.42;right:-34%;top:32%}}
+
+.intercept{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.intercept .tag{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brass);border:1px solid rgba(200,164,77,.35);border-radius:999px;padding:6px 12px;
+  background:rgba(200,164,77,.07)}
+.intercept .quote{font-family:var(--disp);font-style:italic;font-size:clamp(15px,1.6vw,18px);color:var(--muted)}
+h1.hero-h{font-family:var(--disp);font-weight:400;line-height:.98;letter-spacing:-.02em;
+  font-size:clamp(44px,7.4vw,104px);max-width:14ch}
+h1.hero-h .ln{display:block;overflow:hidden}
+h1.hero-h .ln>span{display:block;transform:translateY(105%);animation:rise .95s cubic-bezier(.16,1,.3,1) forwards}
+h1.hero-h .ln:nth-child(1)>span{animation-delay:.15s}
+h1.hero-h .ln:nth-child(2)>span{animation-delay:.32s}
+h1.hero-h .ln:nth-child(3)>span{animation-delay:.49s}
+@keyframes rise{to{transform:none}}
+.badmove{display:inline-block;margin-top:18px;font-family:var(--disp);font-style:italic;
+  font-size:clamp(34px,5.4vw,74px);line-height:1;color:var(--brass-lit);opacity:0;
+  animation:fadein .8s ease .95s forwards;position:relative}
+.badmove::after{content:'';position:absolute;left:0;bottom:-10px;height:3px;width:0;background:var(--oxide);
+  border-radius:2px;animation:draw .6s cubic-bezier(.2,.8,.2,1) 1.45s forwards;box-shadow:0 0 16px rgba(209,69,47,.7)}
+@keyframes fadein{to{opacity:1}}
+@keyframes draw{to{width:100%}}
+.hero-sub{margin-top:30px;max-width:52ch;font-size:clamp(15.5px,1.5vw,18.5px);color:var(--muted);
+  opacity:0;animation:fadein .9s ease 1.2s forwards}
+.hero-sub b{color:var(--text);font-weight:500}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px;opacity:0;animation:fadein .9s ease 1.4s forwards}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 26px;
+  font-size:13.5px;font-weight:500;letter-spacing:.01em;border:1px solid transparent;cursor:pointer;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s,border-color .25s,color .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:linear-gradient(180deg,var(--brass-lit),var(--brass));color:#1a1405;
+  box-shadow:0 10px 30px -10px rgba(200,164,77,.6)}
+.btn-p:hover{box-shadow:0 16px 40px -12px rgba(200,164,77,.75)}
+.btn-g{background:var(--glass);border-color:var(--line-lit);color:var(--text);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-g:hover{border-color:var(--brass);color:var(--brass-lit)}
+.btn .ar{transition:transform .25s}
+.btn:hover .ar{transform:translateX(3px)}
+
+/* ticker */
+.ticker{position:relative;z-index:5;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:rgba(10,13,18,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow:hidden}
+.ticker-track{display:flex;gap:0;width:max-content;animation:slide 46s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.ticker-track span{display:inline-flex;align-items:center;gap:12px;padding:11px 26px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.ticker-track span::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--brass);opacity:.6}
+.ticker-track b{color:var(--muted);font-weight:400}
+
+/* ---------- section heads ---------- */
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,52px)}
+.shead .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);
+  display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.shead .lab::before{content:'';width:22px;height:1px;background:var(--brass);opacity:.7}
+.shead h2{font-family:var(--disp);font-weight:400;font-size:clamp(32px,4.6vw,58px);line-height:1.02;letter-spacing:-.02em}
+.shead p{color:var(--muted);max-width:46ch;font-size:16px}
+.linkmore{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+  display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid rgba(200,164,77,.3);
+  transition:border-color .25s,gap .25s;min-height:28px;padding-top:5px}
+.linkmore:hover{border-color:var(--brass);gap:12px}
+
+/* ---------- bento ---------- */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.tile{position:relative;overflow:hidden;border-radius:var(--r);border:1px solid var(--line);
+  background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:clamp(22px,2.6vw,34px);transition:border-color .3s,transform .3s,box-shadow .3s}
+.tile::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .35s;pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(200,164,77,.10),transparent 62%)}
+.tile:hover{border-color:var(--line-lit);transform:translateY(-3px);box-shadow:0 24px 60px -28px rgba(0,0,0,.9)}
+.tile:hover::before{opacity:1}
+.t-lab{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;
+  display:flex;align-items:center;gap:9px}
+.t-lab .dot{width:6px;height:6px;border-radius:50%;background:var(--oxide);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.t-9{grid-column:span 7}
+.t-3{grid-column:span 5}
+.t-4{grid-column:span 4}
+.t-6{grid-column:span 6}
+.t-8{grid-column:span 8}
+@media(max-width:980px){.t-9,.t-3,.t-4,.t-6,.t-8{grid-column:span 12}}
+.tile h3{font-family:var(--disp);font-weight:400;font-size:clamp(26px,3.2vw,40px);line-height:1.04;letter-spacing:-.015em;margin-bottom:14px}
+.tile p{color:var(--muted);font-size:15.5px}
+.meter{margin-top:24px}
+.meter-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.meter-top b{color:var(--brass);font-weight:400}
+.meter-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.meter-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--brass),var(--brass-lit));
+  box-shadow:0 0 18px rgba(200,164,77,.55);transition:width 1.8s cubic-bezier(.2,.8,.2,1)}
+.meter-fill.go{width:100%}
+.statnum{font-family:var(--disp);font-size:clamp(46px,6vw,76px);line-height:.9;color:var(--brass-lit);letter-spacing:-.02em}
+.statsub{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:12px}
+.tile-latest{display:flex;gap:22px;align-items:center}
+.tile-latest img{width:104px;flex:none;border-radius:8px;box-shadow:0 16px 34px -14px rgba(0,0,0,.9)}
+.mini-form{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.mini-form input{flex:1;min-width:170px;background:rgba(255,255,255,.04);border:1px solid var(--line);
+  border-radius:999px;padding:12px 18px;color:var(--text);font-family:var(--sans);font-size:14.5px;transition:border-color .25s}
+.mini-form input:focus{outline:none;border-color:var(--brass)}
+.mini-form input::placeholder{color:var(--dim)}
+.formnote{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--brass);margin-top:12px;min-height:16px}
+
+/* ---------- case files ---------- */
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:clamp(16px,2vw,24px)}
+.chapter{max-width:44rem;margin:0 auto;padding:0 var(--pad) clamp(60px,8vw,110px)}
+.ch-head{text-align:center;padding-bottom:clamp(26px,4vw,44px);margin-bottom:clamp(26px,4vw,40px);border-bottom:1px solid var(--line)}
+.ch-kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);margin-bottom:18px}
+.ch-book{font-family:var(--disp);font-weight:400;font-size:clamp(32px,4.6vw,52px);line-height:1.05;letter-spacing:-.02em}
+.ch-part{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:16px}
+.ch-epi{border:0;background:none;padding:0;margin:30px auto 0;max-width:34rem}
+.ch-epi p{font-family:var(--disp);font-style:italic;font-size:18.5px;line-height:1.55;color:var(--muted);margin:0}
+.ch-epi cite{display:block;margin-top:14px;font-family:var(--sans);font-style:normal;font-size:14px;letter-spacing:.02em;color:var(--dim)}
+.ch-num{font-family:var(--disp);font-weight:400;font-size:clamp(23px,3vw,30px);color:var(--text);margin-top:34px;letter-spacing:-.01em}
+.ch-body{font-size:19px;line-height:1.82;color:#dfe3e8}
+.ch-body p{margin-bottom:1.25em}
+.ch-body p.ital{font-style:italic;color:var(--muted)}
+.ch-first::first-letter{font-family:var(--disp);font-size:3.5em;line-height:.86;float:left;padding:6px 12px 0 0;color:var(--brass-lit)}
+.ch-end{text-align:center;margin-top:clamp(40px,6vw,64px);padding-top:clamp(26px,4vw,40px);border-top:1px solid var(--line)}
+.ch-end-mark{color:var(--brass);font-size:15px;letter-spacing:.4em;margin-bottom:18px}
+.ch-end-note{color:var(--muted);font-size:16px;max-width:46ch;margin:0 auto}
+.ch-end-note em{color:var(--text)}
+.ch-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+@media(max-width:640px){.ch-body{font-size:18px;line-height:1.78}}
+.files{padding-top:16px}
+.standalones{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:760px){.standalones{grid-template-columns:1fr;gap:30px}}
+.sa h4{font-family:var(--disp);font-weight:400;font-size:22px;line-height:1.12;margin-bottom:9px;color:var(--text)}
+.sa p{color:var(--muted);font-size:15px}
+.file{position:relative;border-radius:var(--r);border:1px solid var(--line);margin-top:15px;
+  background:linear-gradient(180deg,var(--slate-2),var(--slate));
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .45s;
+  display:flex;flex-direction:column;outline-offset:4px}
+.file:hover,.file:focus-visible,.file:focus-within,.file.open{transform:translateY(-6px);border-color:rgba(216,207,180,.34);
+  box-shadow:0 34px 70px -32px rgba(0,0,0,.95),0 0 46px -18px rgba(216,207,180,.3)}
+.tab{position:absolute;top:-15px;left:14px;z-index:4;height:16px;padding:0 16px 0 11px;
+  display:flex;align-items:center;font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:#5b5334;white-space:nowrap;
+  background:linear-gradient(180deg,#e3dbc3,#cdc3a3);
+  clip-path:polygon(0 100%,0 22%,6px 0,calc(100% - 12px) 0,100% 100%);transition:filter .45s}
+.file:hover .tab,.file:focus-visible .tab,.file:focus-within .tab,.file.open .tab{filter:brightness(1.12)}
+.file-cov{position:relative;aspect-ratio:2/3;overflow:hidden;background:#0d1116;border-radius:var(--r) var(--r) 0 0}
+.file-cov img{width:100%;height:100%;object-fit:cover;
+  filter:blur(7px) saturate(.22) brightness(.5) contrast(1.05);transform:scale(1.09);
+  transition:filter .75s cubic-bezier(.2,.8,.2,1),transform .85s cubic-bezier(.2,.8,.2,1)}
+.file:hover .file-cov img,.file:focus-visible .file-cov img,.file:focus-within .file-cov img,.file.open .file-cov img{
+  filter:blur(0) saturate(1) brightness(1) contrast(1.02);transform:scale(1.02)}
+.file-cov::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,13,18,.3) 0%,transparent 30%,transparent 56%,rgba(10,13,18,.94) 100%)}
+.sheet{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;
+  text-align:center;overflow:hidden;transform-origin:50% 0;
+  background:repeating-linear-gradient(-45deg,rgba(166,61,47,.16) 0 9px,transparent 9px 20px),
+    linear-gradient(180deg,rgba(12,15,20,.6),rgba(12,15,20,.72));
+  border-bottom:1px solid rgba(216,207,180,.16);
+  transition:transform .6s cubic-bezier(.55,0,.2,1),opacity .5s ease}
+.file:hover .sheet,.file:focus-visible .sheet,.file:focus-within .sheet,.file.open .sheet{transform:translateY(-101%) rotate(-1.2deg);opacity:0}
+.sheet-band{font-family:var(--mono);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;
+  color:#f2ddcd;background:rgba(166,61,47,.9);padding:6px 4px}
+.sheet-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:10px}
+.sm-no{font-family:var(--mono);font-size:22px;letter-spacing:.2em;color:var(--manila);text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.sm-rule{width:44px;height:1px;background:rgba(216,207,180,.4)}
+.sm-note{font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(216,207,180,.62);max-width:16ch;line-height:1.7}
+.sweep{position:absolute;left:-30%;right:-30%;top:-40%;height:44%;z-index:3;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,transparent,rgba(232,230,225,.16),transparent);transform:rotate(-8deg)}
+.file:hover .sweep,.file:focus-visible .sweep,.file:focus-within .sweep,.file.open .sweep{animation:sweepdown .95s ease .12s 1}
+@keyframes sweepdown{0%{opacity:0;transform:translateY(0) rotate(-8deg)}22%{opacity:1}
+  100%{opacity:0;transform:translateY(280%) rotate(-8deg)}}
+.file-yr{position:absolute;top:12px;right:12px;z-index:4;font-family:var(--mono);font-size:9px;
+  letter-spacing:.16em;color:var(--muted);background:rgba(10,13,18,.66);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:999px;padding:5px 9px}
+.stamp{position:absolute;z-index:5;top:42%;left:50%;font-family:var(--mono);font-size:11px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--oxide);border:2px solid var(--oxide);border-radius:4px;padding:6px 12px;
+  background:rgba(10,13,18,.4);backdrop-filter:blur(3px);white-space:nowrap;pointer-events:none;
+  transform:translate(-50%,-50%) rotate(-12deg) scale(1.9);opacity:0;
+  transition:transform .34s cubic-bezier(.2,1.7,.4,1) .12s,opacity .22s .12s}
+.file:hover .stamp,.file:focus-visible .stamp,.file:focus-within .stamp,.file.open .stamp{opacity:.96;transform:translate(-50%,-50%) rotate(-12deg) scale(1)}
+.file-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1;position:relative;z-index:4;margin-top:-46px}
+.file-body h3{font-family:var(--disp);font-weight:400;font-size:23px;line-height:1.08;letter-spacing:-.01em}
+.file-hook{margin-top:12px;font-size:14.5px;line-height:1.55;color:var(--muted);flex:1}
+.redact{background:var(--text);color:transparent;border-radius:2px;padding:0 3px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  transition:background .45s ease .18s,color .45s ease .18s}
+.file:hover .redact,.file:focus-visible .redact,.file:focus-within .redact,.file.open .redact{background:transparent;color:inherit}
+.file-act{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.file-open{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+  display:inline-flex;align-items:center;gap:7px;transition:gap .25s;min-height:28px;padding:5px 2px;margin:-5px -2px}
+.file:hover .file-open{gap:11px}
+.buy-mini{display:flex;gap:7px}
+.buy-mini a{width:40px;height:40px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--line);
+  font-family:var(--mono);font-size:10px;color:var(--muted);transition:border-color .2s,color .2s,background .2s}
+.buy-mini a:hover{border-color:var(--brass);color:var(--brass);background:rgba(200,164,77,.08)}
+.hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+  margin-top:10px;transition:opacity .4s}
+.file:hover .hint,.file:focus-visible .hint,.file:focus-within .hint,.file.open .hint{opacity:.45}
+
+/* ---------- monument ---------- */
+.monument{position:relative;overflow:hidden;border-radius:var(--r);
+  background:
+    radial-gradient(120% 80% at 50% -10%,rgba(255,255,255,.62),transparent 58%),
+    repeating-linear-gradient(101deg,rgba(112,104,84,.055) 0 2px,transparent 2px 118px),
+    repeating-linear-gradient(94deg,rgba(112,104,84,.05) 0 1px,transparent 1px 42px),
+    linear-gradient(178deg,#f1ede3,#ddd6c6);
+  color:#4a4539;padding:clamp(44px,6vw,80px) clamp(22px,4vw,60px);text-align:center;
+  box-shadow:inset 0 0 90px rgba(90,84,68,.14),0 30px 80px -40px rgba(0,0,0,.9)}
+.monument::before,.monument::after{content:'';position:absolute;width:18px;height:18px}
+.monument::before{top:14px;left:14px;border-top:2px solid rgba(160,138,82,.8);border-left:2px solid rgba(160,138,82,.8)}
+.monument::after{bottom:14px;right:14px;border-bottom:2px solid rgba(160,138,82,.8);border-right:2px solid rgba(160,138,82,.8)}
+.engrave{font-family:var(--mono);letter-spacing:.28em;text-transform:uppercase;color:#6e6759;
+  text-shadow:0 1px 0 rgba(255,255,255,.92),0 -1px 0 rgba(0,0,0,.13)}
+.mon-head{font-size:11px;margin-bottom:34px}
+.stars{display:flex;justify-content:center;flex-wrap:wrap;gap:13px 17px;max-width:640px;margin:0 auto 16px;font-size:22px;line-height:1}
+.stars i{font-style:normal;color:#b3ab98;text-shadow:0 1px 0 rgba(255,255,255,.85);
+  opacity:0;transform:scale(.4);transition:opacity .5s ease,transform .5s cubic-bezier(.2,1.6,.4,1)}
+.stars.lit i{opacity:1;transform:none}
+.stars i.act{color:#a08a52}
+.stars i.lost{color:transparent;-webkit-text-stroke:1px #a99f8b;text-shadow:none}
+.mon-leg{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8b8371;margin-bottom:40px}
+.mon-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto 34px}
+@media(max-width:620px){.mon-nums{grid-template-columns:1fr;gap:26px}}
+.mon-nums .n{font-family:var(--disp);font-size:clamp(42px,6vw,64px);line-height:.92;color:#38332a;letter-spacing:-.02em}
+.mon-nums .c:last-child .n{color:#9c8547}
+.mon-nums .l{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8b8371;margin-top:11px}
+.mon-foot{font-size:10px}
+.mon-foot em{font-style:normal;color:#5c5545}
+
+/* ---------- pull quote ---------- */
+.pull{text-align:center;max-width:760px;margin:0 auto}
+.pull .xh{width:34px;height:34px;margin:0 auto 24px}
+.pull p{font-family:var(--disp);font-style:italic;font-size:clamp(24px,3.4vw,40px);line-height:1.24;letter-spacing:-.015em}
+.pull cite{display:block;margin-top:20px;font-family:var(--mono);font-style:normal;font-size:10.5px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- split (about preview) ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.portrait{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.portrait img{width:100%;filter:saturate(.85) contrast(1.05)}
+.portrait figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 22px 16px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  background:linear-gradient(180deg,transparent,rgba(10,13,18,.9))}
+.prose p{color:var(--muted);margin-bottom:16px;font-size:16.5px}
+.prose p b{color:var(--text);font-weight:500}
+.prose p em{color:var(--text)}
+blockquote{border-left:2px solid var(--brass);padding:4px 0 4px 22px;margin:26px 0}
+blockquote p{font-family:var(--disp);font-style:italic;font-size:20px;line-height:1.34;color:var(--text);margin-bottom:9px}
+blockquote cite{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- inner pages ---------- */
+.page-h{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(24px,3vw,40px)}
+.page-h .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);
+  display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.page-h .lab::before{content:'';width:22px;height:1px;background:var(--brass);opacity:.7}
+.page-h h1,.page-h h2{font-family:var(--disp);font-weight:400;font-size:clamp(38px,6vw,76px);line-height:1;letter-spacing:-.025em}
+.page-h .sub{margin-top:20px;color:var(--muted);max-width:60ch;font-size:17px}
+.narrow{max-width:860px}
+.narrow h3{font-family:var(--disp);font-weight:400;font-size:clamp(24px,3vw,32px);margin:44px 0 14px;letter-spacing:-.015em}
+.narrow p{color:var(--muted);margin-bottom:16px;font-size:16.5px}
+.narrow p b{color:var(--text);font-weight:500}
+.narrow p em{color:var(--text)}
+.narrow a.inline{color:var(--brass);border-bottom:1px solid rgba(200,164,77,.35)}
+.narrow a.inline:hover{border-color:var(--brass)}
+
+/* book detail */
+.bk{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:clamp(30px,5vw,70px);align-items:start}
+@media(max-width:900px){.bk{grid-template-columns:1fr}}
+.bk-cov{position:relative}
+.bk-cov img{width:100%;border-radius:14px;box-shadow:0 40px 80px -30px rgba(0,0,0,1),0 0 60px -24px rgba(200,164,77,.4)}
+.bk-cov::after{content:'';position:absolute;left:8%;right:8%;bottom:-26px;height:44px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(200,164,77,.28),transparent);filter:blur(12px)}
+.bk-fallback{aspect-ratio:2/3;border-radius:14px;border:1px solid var(--line);
+  background:linear-gradient(168deg,var(--slate-2),var(--void));display:flex;flex-direction:column;
+  justify-content:center;text-align:center;padding:28px}
+.bk-fallback .ft{font-family:var(--disp);font-size:28px;line-height:1.1}
+.bk-fallback .fa{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:16px}
+.bookmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--muted);
+  margin:16px 0 26px;line-height:1.95;text-transform:uppercase}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 26px}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--glass)}
+.chip.gold{color:var(--brass);border-color:rgba(200,164,77,.34);background:rgba(200,164,77,.07)}
+.bk h1,.bk h2{font-family:var(--disp);font-weight:400;font-size:clamp(34px,5vw,60px);line-height:1.02;letter-spacing:-.025em}
+.syn p{color:var(--muted);margin-bottom:16px;font-size:16.5px;max-width:60ch}
+.allbooks{margin-top:16px;font-size:13.5px;color:var(--muted)}
+.allbooks a{color:var(--brass);border-bottom:1px solid rgba(200,164,77,.35);padding-bottom:1px}
+.allbooks a:hover{border-color:var(--brass)}
+.buyhead{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:32px 0 14px}
+.buys{display:flex;gap:10px;flex-wrap:wrap}
+.buys a{border-radius:999px;padding:12px 20px;font-size:13px;font-weight:400;border:1px solid var(--line-lit);
+  color:var(--text);background:var(--glass);transition:border-color .25s,color .25s,transform .25s,background .25s}
+.buys a:hover{border-color:var(--brass);color:var(--brass-lit);transform:translateY(-2px);background:rgba(200,164,77,.07)}
+.buys a.p{background:linear-gradient(180deg,var(--brass-lit),var(--brass));color:#1a1405;border-color:transparent;font-weight:500;
+  box-shadow:0 10px 26px -12px rgba(200,164,77,.6)}
+.buys a.p:hover{color:#1a1405}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:clamp(46px,6vw,76px)}
+@media(max-width:640px){.pager{grid-template-columns:1fr}}
+.pager a{border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;background:var(--glass);
+  transition:border-color .25s,transform .25s,background .25s}
+.pager a:hover{border-color:var(--line-lit);transform:translateY(-2px);background:var(--glass-2)}
+.pager .d{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.pager .t{font-family:var(--disp);font-size:20px;line-height:1.14}
+.pager a.nx{text-align:right}
+.crumb{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:32px;transition:gap .25s,color .25s;min-height:28px;padding:5px 2px}
+.crumb:hover{color:var(--brass);gap:13px}
+
+/* schedule */
+.sched{display:grid;gap:12px}
+.ev{display:grid;grid-template-columns:96px 1fr;gap:22px;align-items:start;
+  border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;background:var(--glass);
+  transition:border-color .3s,transform .3s,background .3s}
+.ev:hover{border-color:var(--line-lit);transform:translateX(4px);background:var(--glass-2)}
+@media(max-width:600px){.ev{grid-template-columns:1fr;gap:12px}}
+.ev .dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);
+  border:1px solid rgba(200,164,77,.3);border-radius:8px;padding:8px;text-align:center;background:rgba(200,164,77,.06)}
+.ev h3{font-size:18px;font-weight:500;letter-spacing:-.01em;font-family:var(--sans);margin:0}
+.ev .loc{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);margin-top:6px}
+.ev .desc{color:var(--muted);font-size:15px;margin-top:10px;max-width:62ch}
+.demo-note{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);border:1px dashed var(--line-lit);border-radius:999px;padding:8px 14px;margin-top:22px}
+
+/* forms */
+.formcard{border:1px solid var(--line);border-radius:var(--r);background:var(--glass);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:clamp(24px,3.4vw,40px);max-width:560px}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.field input,.field textarea{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:15.5px;transition:border-color .25s,background .25s;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--brass);background:rgba(200,164,77,.05)}
+.field input::placeholder,.field textarea::placeholder{color:var(--dim)}
+.hp{position:absolute;left:-9999px;top:-9999px}
+.fineprint{font-size:13px;color:var(--dim);margin-top:14px}
+.fineprint a{color:var(--manila)}
+
+/* media kit */
+.kit-hero{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);margin-bottom:40px;position:relative}
+.kit-hero img{width:100%;height:clamp(180px,26vw,300px);object-fit:cover;filter:saturate(.8) brightness(.8)}
+.kit-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,13,18,.85))}
+.kit-grid{display:grid;grid-template-columns:280px 1fr;gap:clamp(24px,4vw,54px);align-items:start;margin-bottom:20px}
+@media(max-width:760px){.kit-grid{grid-template-columns:1fr}}
+.facts{list-style:none}
+.facts li{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);
+  color:var(--muted);font-size:15px}
+@media(max-width:520px){.facts li{grid-template-columns:1fr;gap:4px}}
+.facts b{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+  font-weight:400;padding-top:3px}
+.covgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+@media(max-width:640px){.covgrid{grid-template-columns:repeat(2,1fr)}}
+.covgrid a{border-radius:10px;overflow:hidden;border:1px solid var(--line);transition:transform .3s,border-color .3s,box-shadow .3s}
+.covgrid a:hover{transform:translateY(-4px);border-color:var(--brass);box-shadow:0 20px 40px -20px rgba(0,0,0,.9)}
+.covgrid img{width:100%;aspect-ratio:2/3;object-fit:cover}
+.dl{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.dl a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:10px 16px;transition:border-color .25s,color .25s}
+.dl a:hover{border-color:var(--brass);color:var(--brass)}
+
+/* faq */
+.faq{border-top:1px solid var(--line);margin-top:34px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;padding:20px 0;font-size:18px;font-weight:400;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;transition:color .2s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--brass-lit)}
+.faq summary::after{content:'+';font-family:var(--mono);color:var(--brass);font-size:20px;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:var(--muted);padding-bottom:22px;max-width:62ch;font-size:16px}
+
+/* cipher */
+.cipher{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:20px var(--pad);text-align:center;cursor:pointer;overflow:hidden;
+  background:linear-gradient(90deg,rgba(200,164,77,.05),transparent 30%,transparent 70%,rgba(209,69,47,.05))}
+.cipher{width:100%;border-left:0;border-right:0;font:inherit;display:block;color:inherit}
+.cipher .k{position:absolute;top:6px;left:var(--pad);font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim)}
+.cipher .cta{position:absolute;top:6px;right:var(--pad);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--brass);border:1px solid rgba(200,164,77,.45);border-radius:999px;padding:4px 11px}
+.cipher:hover .cta,.cipher.dec .cta{background:rgba(200,164,77,.14)}
+.cipher .ct,.cipher .pt{display:block;font-family:var(--mono);font-size:clamp(9px,1.3vw,12px);
+  letter-spacing:.3em;transition:opacity .5s}
+.cipher .ct{color:#5b6675;margin-top:6px}
+.cipher .pt{position:absolute;left:var(--pad);right:var(--pad);top:50%;transform:translateY(-30%);opacity:0;color:var(--brass)}
+.cipher:hover .ct,.cipher.dec .ct{opacity:0}
+.cipher:hover .pt,.cipher.dec .pt{opacity:1}
+
+/* footer */
+footer{border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(0,0,0,.4))}
+.foot{max-width:var(--maxw);margin:0 auto;padding:clamp(44px,6vw,72px) var(--pad) 30px;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px}
+@media(max-width:860px){.foot{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.foot{grid-template-columns:1fr}}
+.foot h4{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin-bottom:16px;font-weight:500}
+.foot a{display:block;color:var(--muted);font-size:14.5px;margin-bottom:5px;padding:5px 0;min-height:26px;transition:color .2s,transform .2s}
+.foot a:hover{color:var(--text);transform:translateX(3px)}
+.foot .blurb{color:var(--dim);font-size:14px;max-width:34ch;margin-top:14px}
+.foot .fbrand{font-family:var(--disp);font-size:24px;letter-spacing:-.01em;color:var(--text)}
+.piracy{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad) 30px;color:var(--dim);font-size:13px;max-width:74ch}
+.piracy b{color:var(--muted);font-weight:500}
+.legal{border-top:1px solid var(--line);padding:16px var(--pad);text-align:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- advance chapter & trailer: original site palette and components ---------- */
+.links a.nav-sample{color:var(--brass-lit);border:1px solid rgba(200,164,77,.35)}
+.links a.nav-sample.on{color:var(--void)}
+.sample-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+.sample-feature{display:grid;grid-template-columns:minmax(0,240px) 1fr;gap:clamp(24px,4vw,48px);align-items:center}
+.sample-feature h2{font-family:var(--disp);font-weight:400;font-size:clamp(32px,4.6vw,54px);line-height:1.06;letter-spacing:-.02em;margin-bottom:18px}
+.sample-feature p{max-width:56ch}
+.sample-cover img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:var(--r-sm);box-shadow:0 22px 48px -24px rgba(0,0,0,.9)}
+.sample-cover figcaption{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:12px;text-align:center}
+.release-media{display:block;padding-bottom:clamp(36px,5vw,60px)}
+.release-media>figure{width:100%;max-width:900px;margin-inline:auto}
+.trailer-frame{position:relative;border:1px solid var(--line-lit);border-radius:var(--r);overflow:hidden;background:#000;aspect-ratio:16/9}
+.trailer-frame video{display:block;width:100%;height:100%;object-fit:contain}
+.trailer-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid rgba(200,164,77,.65);border-radius:999px;background:rgba(10,13,18,.93);color:var(--brass-lit);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;padding:16px 23px;cursor:pointer;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.trailer-play:hover{background:var(--slate-2);border-color:var(--brass-lit)}
+.trailer-play[hidden]{display:none}
+.trailer-caption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-top:14px}
+.trailer-caption a{color:var(--brass);border-bottom:1px solid rgba(200,164,77,.3)}
+.sample-home{padding-top:0}
+#chapter-one{scroll-margin-top:100px}
+#chapter-one:focus{outline:none}
+@media(min-width:901px) and (max-width:1120px){.brand i{display:none}.links a{padding-left:10px;padding-right:10px}}
+@media(max-width:900px){.links a.nav-sample.on{color:var(--brass)}}
+@media(max-width:700px){
+  .sample-feature{grid-template-columns:1fr}
+  .sample-feature .sample-cover{max-width:240px;width:100%;margin:0 auto}
+  .trailer-play{font-size:10px;padding:13px 18px}
+}
+
+/* Accessibility and reader navigation, preserving the original design. */
+.skip-link{position:fixed;top:10px;left:20px;z-index:10001;padding:10px 18px;background:var(--brass-lit);color:var(--void);border-radius:8px;transform:translateY(-160%)}
+.skip-link:focus{transform:none}
+#main{scroll-margin-top:90px}#main:focus{outline:none}
+.closer{border:0;background:none;font:inherit}
+body.menu-locked{overflow:hidden}
+.field [aria-invalid="true"],.mini-form [aria-invalid="true"]{border-color:var(--oxide)}
+button[disabled]{cursor:wait;opacity:.65}
+@media(max-width:640px){.t-lab,.ch-kicker,.trailer-caption,.sample-cover figcaption,.field label{font-size:11px;letter-spacing:.12em;color:var(--muted)}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg class="grain" aria-hidden="true"><filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#gr)"/></svg>
+<div class="vignette" aria-hidden="true"></div>
+<div class="prog" id="prog" aria-hidden="true"></div>
+
+<div class="statusbar">
+  <span><span class="livedot"></span>Status <b>Active</b></span>
+  <span class="hide-s">Department X &middot; Special Operations Group</span>
+  <span>Eight files &middot; <b>SD-09 &mdash; November 2026</b></span>
+</div>
+
+<nav class="nav" id="nav" aria-label="Primary">
+  <div class="nav-in">
+    <a class="brand" href="#/">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="none" stroke="#c8a44d" stroke-width="1.2"/>
+        <path d="M16 3 L18.6 13.4 L29 16 L18.6 18.6 L16 29 L13.4 18.6 L3 16 L13.4 13.4 Z" fill="#c8a44d"/>
+        <circle cx="16" cy="16" r="2.6" fill="#d1452f"/>
+      </svg>
+      John Wayne Falbey <i>Thrillers</i>
+    </a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="links"><span></span></button>
+    <ul class="links" id="links">
+      <li class="menu-close"><button class="closer" id="closer" type="button">Close menu</button></li>
+      <li><a href="#/series" data-nav="series">Series</a></li>
+      <li><a href="#/hidden-dragons" data-nav="hidden-dragons">Next Release</a></li>
+      <li><a class="nav-sample" href="#/excerpt" data-nav="excerpt">Sample Chapter</a></li>
+      <li><a href="#/appearances" data-nav="appearances">Appearances</a></li>
+      <li><a href="#/about" data-nav="about">Author</a></li>
+      <li><a href="#/media" data-nav="media">Press</a></li>
+      <li><a href="#/newsletter" data-nav="newsletter">Newsletter</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+<!-- ================= HOME ================= -->
+<div class="view" data-route="home">
+
+  <header class="hero">
+    <div class="hero-bg"><img id="heroImg" src="assets/rainy-night.jpg" alt="" fetchpriority="high"></div>
+    <div class="hero-scrim"></div>
+    <div class="hero-grid"></div>
+
+    <div class="radar" aria-hidden="true">
+      <svg viewBox="0 0 600 600">
+        <g fill="none" stroke="rgba(200,164,77,.20)" stroke-width="1">
+          <circle cx="300" cy="300" r="70"/><circle cx="300" cy="300" r="140"/>
+          <circle cx="300" cy="300" r="212"/><circle cx="300" cy="300" r="284"/>
+        </g>
+        <g stroke="rgba(200,164,77,.13)" stroke-width="1">
+          <line x1="300" y1="16" x2="300" y2="584"/><line x1="16" y1="300" x2="584" y2="300"/>
+          <line x1="98" y1="98" x2="502" y2="502"/><line x1="502" y1="98" x2="98" y2="502"/>
+        </g>
+        <g stroke="rgba(200,164,77,.4)" stroke-width="1.5">
+          <line x1="300" y1="8" x2="300" y2="26"/><line x1="300" y1="574" x2="300" y2="592"/>
+          <line x1="8" y1="300" x2="26" y2="300"/><line x1="574" y1="300" x2="592" y2="300"/>
+        </g>
+      </svg>
+      <div class="sweep"></div>
+      <span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span>
+    </div>
+
+    <div class="hero-in">
+      <div class="intercept">
+        <span class="tag">Intercept &middot; 1386 A.D.</span>
+        <span class="quote">&ldquo;It is nought good a slepying hound to wake&rdquo; &mdash; Chaucer</span>
+      </div>
+      <h1 class="hero-h">
+        <span class="ln"><span>Nature built them</span></span>
+        <span class="ln"><span>to survive. The government</span></span>
+        <span class="ln"><span>trained them to kill.</span></span>
+      </h1>
+      <span class="badmove">Then tried to destroy them. Bad move.</span>
+      <p class="hero-sub">Eight techno-political thrillers following the deadliest covert-operations unit America ever built &mdash; and buried. <b>The ninth arrives November 2026.</b> For readers of Vince Flynn, Brad Thor, and David Baldacci.</p>
+      <div class="hero-cta">
+        <a class="btn btn-p" href="#/book/sd-01">Start with Book One <span class="ar">&rarr;</span></a>
+        <a class="btn btn-g" href="#/series">Browse the case files</a>
+        <a class="btn btn-g" href="https://www.amazon.com/stores/author/B008ML6X96" target="_blank" rel="noopener">All books on Amazon</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tick"></div>
+  </div>
+
+  <!-- operations board -->
+  <section class="wrap band">
+    <div class="shead rv">
+      <div>
+        <div class="lab">Operations board</div>
+        <h2>Current status</h2>
+      </div>
+      <a class="btn btn-p" href="#/excerpt/chapter-one">Read Sample Chapter <span class="ar">&rarr;</span></a>
+    </div>
+
+    <div class="bento">
+      <div class="tile t-9 rv spot">
+        <div class="t-lab"><span class="dot"></span> File SD-09 &middot; Releasing November 2026</div>
+        <h3>Hidden Dragons,<br>Sleeping Dogs</h3>
+        <p>Nature made the Sleeping Dogs the slow way. Beijing has decided to skip the wait &mdash; gene-edited super-soldiers, built with CRISPR and quietly moved inside the United States. The engineered against the born.</p>
+        <div class="meter">
+          <div class="meter-top"><span>Manuscript</span><b>115,000 words</b></div>
+          <div class="meter-bar"><div class="meter-fill" data-meter></div></div>
+          <div class="meter-top" style="margin-top:9px"><span>Status</span><span>Complete &mdash; in editing</span></div>
+        </div>
+        <div class="sample-actions">
+          <a class="btn btn-p" href="#/excerpt/chapter-one">Read Chapter One <span class="ar">&rarr;</span></a>
+          <a class="btn btn-g" href="#/hidden-dragons">Watch the trailer</a>
+        </div>
+      </div>
+
+      <div class="tile t-3 rv spot" style="display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <div class="t-lab">Latest release</div>
+          <div class="tile-latest">
+            <img src="covers/sd-08.jpg" alt="Spare Me, Kill the Rest" loading="lazy"
+                 onerror="this.style.display='none'">
+            <div>
+              <h3 style="font-size:26px;margin-bottom:8px">Spare Me, Kill the Rest</h3>
+              <p style="font-size:14.5px">File SD-08 &middot; 2024</p>
+            </div>
+          </div>
+        </div>
+        <a class="linkmore" style="margin-top:22px" href="#/book/sd-08">Open the file <span>&rarr;</span></a>
+      </div>
+
+      <div class="tile t-4 rv spot">
+        <div class="t-lab">Start here</div>
+        <div class="statnum" data-count="8">0</div>
+        <div class="statsub">Sleeping Dogs novels &middot; plus two stand-alone thrillers<br>The ninth arrives November 2026</div>
+        <a class="linkmore" style="margin-top:22px" href="#/book/sd-01">Book One &mdash; ebook from US$0.99 <span>&rarr;</span></a>
+      </div>
+
+      <div class="tile t-4 rv spot">
+        <div class="t-lab">Appearances</div>
+        <h3 style="font-size:24px">Scheduling now</h3>
+        <p style="font-size:14.5px">Signings, library talks, and festival panels across Southwest Florida. Dates announced to the newsletter first.</p>
+        <a class="linkmore" style="margin-top:20px" href="#/appearances">Details <span>&rarr;</span></a>
+      </div>
+
+      <div class="tile t-4 rv spot">
+        <div class="t-lab">Secure channel</div>
+        <h3 style="font-size:24px">The newsletter</h3>
+        <p style="font-size:14.5px">Occasional, and not obnoxiously frequent. Request news about upcoming releases.</p>
+        <form class="mini-form" name="newsletter" method="POST" action="/form-handler.php" data-form data-msg="m1" novalidate>
+          <input type="hidden" name="form-name" value="newsletter">
+          <p class="hp" aria-hidden="true"><label>Skip <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <input type="email" name="email" required autocomplete="email" maxlength="254" placeholder="your@email.com" aria-label="Email address">
+          <button class="btn btn-p" type="submit">Request updates</button>
+        </form>
+        <p class="formnote" id="m1" role="status"></p><p class="fineprint">A subscription request; enrollment is confirmed by the author.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- advance sample: dedicated reader entry point -->
+  <section class="wrap band sample-home" aria-labelledby="home-sample-title">
+    <div class="tile sample-feature rv">
+      <figure class="sample-cover">
+        <img src="covers/hidden-dragons-sample-480.webp" srcset="/covers/hidden-dragons-sample-480.webp 480w, /covers/hidden-dragons-sample-960.webp 960w" sizes="(max-width: 700px) 260px, 260px" alt="Hidden Dragons, Sleeping Dogs sample cover by John Wayne Falbey: opposing soldiers, a red DNA dragon, and misty mountains" width="960" height="960" loading="lazy">
+        <figcaption>Hidden Dragons, Sleeping Dogs &middot; Sample cover</figcaption>
+      </figure>
+      <div>
+        <div class="t-lab"><span class="dot"></span> Sample chapter &middot; File SD-09</div>
+        <h2 id="home-sample-title">The next threat.<br>The first chapter.</h2>
+        <p>Step inside <em>Hidden Dragons, Sleeping Dogs</em> before its November 2026 release. Read Chapter One, &ldquo;Birthplace of Dragons,&rdquo; or watch the new trailer.</p>
+        <div class="sample-actions">
+          <a class="btn btn-p" href="#/excerpt/chapter-one">Read Chapter One <span class="ar">&rarr;</span></a>
+          <a class="btn btn-g" href="#/hidden-dragons">Watch the trailer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- case files -->
+  <section class="wrap band" style="padding-top:0">
+    <div class="shead rv">
+      <div>
+        <div class="lab">Case files SD-01 &ndash; SD-08</div>
+        <h2>The series</h2>
+        <p style="margin-top:16px">Eight novels, in reading order. Hover a file to declassify the summary.</p>
+      </div>
+      <a class="linkmore" href="#/series">All files <span>&rarr;</span></a>
+    </div>
+    <div class="files" id="filesHome"></div>
+  </section>
+
+  <!-- monument -->
+  <section class="wrap band" style="padding-top:0">
+    <div class="monument rv" id="mon">
+      <p class="engrave mon-head">In honor of those who were recruited, forged, and betrayed</p>
+      <div class="stars" id="stars" aria-hidden="true"></div>
+      <p class="mon-leg">6 active &middot; 9 stood down &middot; 4 did not survive selection</p>
+      <div class="mon-nums">
+        <div class="c"><div class="n" data-count="19">0</div><div class="l">Recruited</div></div>
+        <div class="c"><div class="n" data-count="15">0</div><div class="l">Survived training</div></div>
+        <div class="c"><div class="n" data-count="6">0</div><div class="l">Remained</div></div>
+      </div>
+      <p class="engrave mon-foot">Department X &middot; Designation <em>Homo maximus</em></p>
+    </div>
+  </section>
+
+  <!-- pull quote -->
+  <section class="wrap band" style="padding-top:0">
+    <div class="pull rv">
+      <svg class="xh" viewBox="0 0 34 34" aria-hidden="true">
+        <g fill="none" stroke="#c8a44d" stroke-width="1">
+          <circle cx="17" cy="17" r="11"/>
+          <line x1="17" y1="0" x2="17" y2="8"/><line x1="17" y1="26" x2="17" y2="34"/>
+          <line x1="0" y1="17" x2="8" y2="17"/><line x1="26" y1="17" x2="34" y2="17"/>
+        </g>
+        <circle cx="17" cy="17" r="1.8" fill="#d1452f"/>
+      </svg>
+      <p>&ldquo;For the strength of the pack is the wolf, and the strength of the wolf is the pack.&rdquo;</p>
+      <cite>Kipling &middot; The Second Jungle Book</cite>
+    </div>
+  </section>
+
+  <!-- author -->
+  <section class="wrap band" style="padding-top:0">
+    <div class="split">
+      <figure class="portrait rv">
+        <img src="assets/author-about.jpg" alt="John Wayne Falbey" loading="lazy">
+        <figcaption>The author &middot; Location undisclosed</figcaption>
+      </figure>
+      <div class="prose rv">
+        <div class="lab" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);margin-bottom:16px">Author of record</div>
+        <h2 style="font-family:var(--disp);font-weight:400;font-size:clamp(30px,4vw,48px);line-height:1.04;letter-spacing:-.02em;margin-bottom:22px">A recovering attorney with a talent for conspiracies</h2>
+        <p><b>John Wayne Falbey</b> wasn't named after the Duke &mdash; a nurse at hospital checkout insisted every child needed two given names, and his flustered father, John, offered his own.</p>
+        <p>A native Floridian, he switched to pre-law ten minutes into an introductory calculus class, graduated from Vanderbilt Law, and practiced transactional law before crossing into real estate development. That experience is what lends his conspiracies their uncomfortable plausibility.</p>
+        <blockquote>
+          <p>&ldquo;Falbey offers a bold, gritty spy thriller&rdquo;</p>
+          <cite><a href="https://www.kirkusreviews.com/book-reviews/john-wayne-falbey/sleeping-dogs-bQzpUlJR/" target="_blank" rel="noopener">Kirkus Reviews &middot; Sleeping Dogs: The Awakening</a></cite>
+        </blockquote>
+        <a class="linkmore" href="#/about">The full story <span>&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SERIES ================= -->
+<div class="view" data-route="series">
+  <div class="wrap page-h">
+    <div class="lab">Case files SD-01 &ndash; SD-08</div>
+    <h1 id="page-title">The series</h1>
+    <p class="sub">Each novel stands on its own, but the files reward being read in sequence &mdash; loyalties shift, enemies survive, and the past has a long reach. Hover any file to declassify it, or open it for the full synopsis and every retailer.</p>
+  </div>
+  <div class="wrap band" style="padding-top:20px">
+    <div class="files" id="filesAll"></div>
+    <div class="tile rv" style="margin-top:28px">
+      <div class="t-lab">Also by John Wayne Falbey</div>
+      <h3 style="font-size:26px">Two stand-alone thrillers</h3>
+      <p style="margin-bottom:20px">Outside the Sleeping Dogs series &mdash; and every bit as unsparing. Ten novels in all.</p>
+      <div class="standalones">
+        <div class="sa">
+          <h4>The Quixotics</h4>
+          <p>Three Vietnam combat veterans, a leaky sailboat, and a gunrunning job to anti-Castro insurgents in the 1970s Caribbean. The first novel he ever wrote &mdash; between 1:00 and 3:00 a.m. as a law student.</p>
+          <div class="buys" style="margin-top:14px">
+            <a class="p" href="https://www.amazon.com/stores/author/B008ML6X96" target="_blank" rel="noopener">Amazon</a>
+            <a href="https://books.apple.com/us/book/the-quixotics/id571043172" target="_blank" rel="noopener">Apple Books</a>
+          </div>
+        </div>
+        <div class="sa">
+          <h4>The Taxman Cometh</h4>
+          <p>A rogue IRS agent sets out to destroy the world of the one man he should have left alone &mdash; a cautionary tale about choosing the wrong victim.</p>
+          <div class="buys" style="margin-top:14px">
+            <a class="p" href="https://www.amazon.com/stores/author/B008ML6X96" target="_blank" rel="noopener">Amazon</a>
+            <a href="https://books.apple.com/us/book/the-taxman-cometh/id1542814845" target="_blank" rel="noopener">Apple Books</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile rv" style="margin-top:24px">
+      <div class="t-lab">In your ears</div>
+      <p>Audio editions are available through Google Play, Apple Books, and Audible &mdash; <em style="color:var(--text)">Sleeping Dogs: The Awakening</em> among them.
+      <a class="linkmore" style="margin-left:6px" href="https://www.audible.com/author/John-Wayne-Falbey/B008ML6X96" target="_blank" rel="noopener">Audible page <span>&rarr;</span></a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= BOOK ================= -->
+<div class="view" data-route="book">
+  <div class="wrap page-h" id="bookView"></div>
+</div>
+
+<!-- ================= SD-09 ================= -->
+<div class="view" data-route="hidden-dragons">
+  <div class="wrap page-h">
+    <div class="lab">File SD-09 &middot; Releasing November 2026</div>
+    <h1 id="page-title">Hidden Dragons,<br>Sleeping Dogs</h1>
+    <p class="sub">The ninth Sleeping Dogs thriller is finished and in editing, with release set for November 2026. The on-sale date goes to newsletter subscribers first.</p>
+    <div class="sample-actions">
+      <a class="btn btn-p" href="#/excerpt/chapter-one">Read Sample Chapter <span class="ar">&rarr;</span></a>
+      <a class="btn btn-g" href="#/newsletter">Get release updates</a>
+    </div>
+  </div>
+  <section class="wrap release-media" aria-label="Book trailer">
+    <figure>
+      <div class="trailer-frame">
+        <video id="trailer-release" controls playsinline preload="none" poster="assets/hidden-dragons-trailer-poster.jpg" aria-label="Hidden Dragons, Sleeping Dogs promotional trailer, 15 seconds" aria-describedby="trailer-caption-release">
+          <source src="assets/hidden-dragons-helix-trailer.mp4" type="video/mp4">
+          <a href="assets/hidden-dragons-helix-trailer.mp4">Watch the book trailer</a>.
+        </video>
+        <button class="trailer-play" type="button" data-play-trailer="trailer-release" aria-label="Play Hidden Dragons, Sleeping Dogs trailer">&#9654; &nbsp; Watch trailer &middot; 15s</button>
+      </div>
+      <figcaption class="trailer-caption" id="trailer-caption-release"><span>Hidden Dragons, Sleeping Dogs &middot; Book trailer</span></figcaption>
+    </figure>
+  </section>
+
+  <div class="wrap band narrow" style="padding-top:16px">
+    <div id="launchSlot"></div>
+    <p style="color:var(--muted);font-size:17.5px;margin-bottom:16px">Nature made the Sleeping Dogs the slow way &mdash; by evolution. Beijing has decided to skip the wait. Using CRISPR gene-editing technology, the Chinese Communist Party has built super-soldiers of its own and quietly moved them inside the United States. The engineered against the born. The lab-made against nature-made.</p>
+    <p style="color:var(--muted);font-size:17.5px">The Dogs were called <em style="color:var(--text)">Homo maximus</em> by the scientists who found them &mdash; beta models of the species that follows ours: stronger, faster, smarter. In <em style="color:var(--text)">Hidden Dragons</em>, the threat is deliberately engineered: CRISPR-built adversaries against the naturally evolved Dogs.</p>
+
+    <div class="tile rv" style="margin:36px 0">
+      <div class="t-lab"><span class="dot"></span> Manuscript status</div>
+      <div class="meter" style="margin-top:8px">
+        <div class="meter-top"><span>Written</span><b>115,000 words</b></div>
+        <div class="meter-bar"><div class="meter-fill" data-meter></div></div>
+        <div class="meter-top" style="margin-top:9px"><span>Status</span><span>Complete &mdash; in editing</span></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+        <a class="btn btn-p" href="#/newsletter">Request release updates <span class="ar">&rarr;</span></a>
+        <a class="btn btn-g" href="#/excerpt">Read Chapter One</a>
+      </div>
+    </div>
+
+    <h3>Frequently asked</h3>
+    <div class="faq">
+      <details><summary>When does it come out?</summary><p>November 2026. The manuscript is finished and in editing now; the exact on-sale date and final cover reveal go to <a class="inline" href="#/newsletter">newsletter subscribers</a> before they appear anywhere else. You can <a class="inline" href="#/excerpt">read Chapter One now</a>.</p></details>
+      <details><summary>Do I need to read the other eight first?</summary><p>Each book stands alone, but the series rewards reading in order. If you're new, <a class="inline" href="#/book/sd-01">start with The Awakening</a> &mdash; the ebook starts at US$0.99. Prices and availability vary by retailer and country.</p></details>
+      <details><summary>Will there be a book ten?</summary><p>Yes. <em>Hidden Dragons</em> is the ninth Sleeping Dogs thriller, not the last one &mdash; more are coming. In the author's words: we haven't heard the last from those Dogs.</p></details>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SAMPLE CHAPTER ================= -->
+<div class="view" data-route="excerpt">
+  <div class="wrap page-h">
+    <div class="lab">Sample chapter &middot; File SD-09 &middot; November 2026</div>
+    <h1 id="page-title">Hidden Dragons,<br>Sleeping Dogs</h1>
+    <p class="sub">Watch the trailer, then read Chapter One: &ldquo;Birthplace of Dragons.&rdquo; Your first look inside the ninth Sleeping Dogs thriller.</p>
+    <div class="sample-actions">
+      <a class="btn btn-p" href="#/excerpt/chapter-one">Start reading Chapter One <span class="ar">&darr;</span></a>
+      <a class="btn btn-g" href="#/hidden-dragons">About the new book</a>
+    </div>
+  </div>
+  <section class="wrap release-media" aria-label="Book trailer">
+    <figure>
+      <div class="trailer-frame">
+        <video id="trailer-excerpt" controls playsinline preload="none" poster="assets/hidden-dragons-trailer-poster.jpg" aria-label="Hidden Dragons, Sleeping Dogs promotional trailer, 15 seconds" aria-describedby="trailer-caption-excerpt">
+          <source src="assets/hidden-dragons-helix-trailer.mp4" type="video/mp4">
+          <a href="assets/hidden-dragons-helix-trailer.mp4">Watch the book trailer</a>.
+        </video>
+        <button class="trailer-play" type="button" data-play-trailer="trailer-excerpt" aria-label="Play Hidden Dragons, Sleeping Dogs trailer">&#9654; &nbsp; Watch trailer &middot; 15s</button>
+      </div>
+      <figcaption class="trailer-caption" id="trailer-caption-excerpt"><span>Hidden Dragons, Sleeping Dogs &middot; Book trailer</span></figcaption>
+    </figure>
+  </section>
+  <article class="chapter" id="chapter-one" tabindex="-1">
+    <header class="ch-head">
+      <p class="ch-kicker">Advance excerpt &middot; Releasing November 2026</p>
+      <h2 class="ch-book">Hidden Dragons,<br>Sleeping Dogs</h2>
+      <p class="ch-part">PART ONE &middot; Dark Moon Rising</p>
+      <blockquote class="ch-epi"><p>It’s now time to prepare: A war with China will be fought on American soil. The Chinese military will take down our grid, turn off our water, and spread disease. Chinese Communist Party saboteurs will detonate bombs to terrorize. We have left ourselves vulnerable in our own homeland.</p><cite>&mdash; Gordon G. Chang</cite></blockquote>
+      <h3 class="ch-num">Chapter 1&mdash;Birthplace of Dragons</h3>
+    </header>
+    <div class="ch-body">
+        <p class="ch-first">For over 4,000 years the Chinese have hungered for global dominance. That day has arrived. China hid its most closely guarded secret in the dense and craggy forests of the remote Nanling Mountains. Genetically enhanced Chinese soldiers. Products of a highly advanced, long-range program, they had physical and cognitive abilities vastly superior to all other Homo sapiens.</p>
+        <p class="ital">The 150 genetically enhanced Chinese soldiers were known as Yǐncáng de lóng, the Hidden Dragons. The first generation was produced in a secret genetics lab known as Lóng de dànshēng dì, Birthplace of Dragons. They literally were supermen.</p>
+        <p>Captain Tian Longhua was their commanding officer. Ironically, his name meant Field of Dragon Splendor.</p>
+        <p>The morning was cool and dry as Tian left his temporary quarters and walked briskly to the genetics laboratory that had created him and his supersoldier colleagues. The mountain air felt refreshing after his strenuous morning training exercises. Like all of the Hidden Dragons, he had a precise awareness of time. He knew with absolute certainty that his meeting with General Liang Chungwu was in five minutes—no more, no less. Tian adjusted his pace to arrive at the meeting in exactly four and a half minutes. He reached the entrance to the lab with thirty seconds to spare.</p>
+        <p>Liang Chungwu was commander of the People’s Liberation Army’s Southern Theater Command, and one of the most powerful military commanders in China. More importantly, he also was a favorite of China’s president Jiang Qui Xing. To be late for a meeting with General Liang was unthinkable, and potentially fatal.</p>
+        <p>The lab was housed in a nondescript, multi-story building surrounded by high-security fencing and guarded by elite PLA special operations soldiers. Surveillance cameras, motion detectors, and biometric scanners ensured that only authorized personnel could access the facility.</p>
+        <p>At the entrance, Tian was challenged by two heavily armed sentries who carefully examined his credentials. Then the biometric devices authenticated his identity by fingerprint and iris scans and voice recognition. After passing these security measures, he entered a small foyer. Its walls and ceiling were painted a flat white. The floor was covered with two-foot squares of drab brown tile. No furniture or decorations broke the monotony. The ambience was sterile to the point of antiseptic. The same atmosphere bled into the corridors that branched off to various specialized areas, each dedicated to different aspects of genetic research and enhancement.</p>
+        <p>Tian took the first corridor on his right, the research and development wing. Here, scientists and geneticists conducted experiments on CRISPR (Clustered Regularly Interspaced Short Palindromic Repeats) and other gene-editing technologies. The R&amp;D wing included advanced computing systems for genetic modeling and analysis. Halfway down the corridor he entered a room that served as a spartan lounge area for the scientists working in R&amp;D.</p>
+        <p>A short, thin, middle-aged man sat in an ancient lounge chair. He wore a white lab coat and was sipping tea. He looked up as Tian entered and regarded the captain through wire-rimmed glasses. Tian immediately recognized Dr. Wei Jianguo, chief molecular biologist in the research division at the Birthplace of Dragons.</p>
+        <p>Wei, a perpetually nervous little man, made a jerky wave of recognition and stood. Tian towered over him.</p>
+        <p>“The general asked me to remind you that you and your men are exceptional beings. You have been … ah, altered by my colleagues and me to be perfect physical specimens. You have been created to be superior to all other human beings on this planet. There is nothing that can stop you from carrying out your mission.”</p>
+        <p>Tian stared at Wei. The scientist’s comments triggered a memory, something he had read while studying Western culture. It concerned the ill-fated ocean liner Titanic. Before its first and only voyage, someone supposedly had said that not even God could sink the ship. His thoughts were interrupted by the entrance of General Liang Chungwu.</p>
+        <p>The general was a tall man, a six-footer. His slicked-back hair was thinning and morphing from black to gray. Still fit-looking in his sixties, Liang favored dark blue zhifu suits with only four small gold stars on each side of his collar to indicate his rank as a full general in the PLA. He was famous for his aversion to wearing service ribbons. If forced to wear them, the left side of his jacket would have been covered with endless rows of “fruit salad,” as the colorful ribbon bars were called.</p>
+        <p>As Dr. Wei scurried from the room, Captain Tian drew himself up and snapped a crisp salute to Liang.</p>
+        <p>The general made a dismissive gesture. “Such behavior is appropriate on the parade ground. In less formal conditions, such as this, we are just two loyal soldiers working together for the greater glory of China … and our president.” Liang’s usually impassive face offered a slight grin with the last three words.</p>
+        <p>Tian tried to relax, but remained tense. General Liang was renowned as a dangerous man, one who didn’t tolerate failure or mistakes. His close relationship with China’s president gave him great power to the point of summarily executing those who disappointed him. The captain knew the Hidden Dragons’ assignment was key to China’s strategy to defeat the West, especially America. It was audacious to the point of foolhardy. Almost certainly a suicide mission.</p>
+        <p>“I appreciate your meeting with me, Longhua,” the general said, using Tian’s given name. In China, the surname comes first followed by an individual’s given names.</p>
+        <p>“It is my honor, General.”</p>
+        <p>Liang motioned toward a countertop where coffee and tea pots simmered. “Would you care to join me?” He filled his cup with coffee. In a nation famous for tea, Liang was infamous for his consumption of coffee. Upwards of a dozen cups a day.</p>
+        <p>As much as Tian wanted a cup of tea, he feared he was too nervous to drink it and his shaking hand might spill it. “No, thank you, General. I am fine.”</p>
+        <p>Liang smiled and pointed to a chair. “Please sit, Longhua.” The general chose a similar chair that faced Tian’s.</p>
+        <p>When they both were seated, Liang set his coffee cup on a small side table next to his chair. “All the training and preparations must have seemed like an eternity to you, did they not?”</p>
+        <p>Tian flashed a quick nervous smile. “It was necessary, the only way we … my men and I could be ready for what we must do.”</p>
+        <p>Liang studied the younger man for a few moments, then said, “Do you remember when you and the others first arrived?”</p>
+        <p>“Yes.”</p>
+        <p>“Your unit was among the best our armed forces had to offer—young, strong, fast, smart, and exceptionally well-trained. Did it seem possible to you at the time that our scientists could make you so much better, could enhance your abilities and talents to such a degree?”</p>
+        <p>Tian shook his head slowly, as if still in disbelief. “No. We thought the experiments would probably kill us or leave us badly disabled and helpless.”</p>
+        <p>“But instead, our gene-editing procedures have turned you into supermen, soldiers such as the world has never seen. Using a combination of gene therapy, stem cell research, and bioprinting technologies, your physical attributes, including muscle growth, bone density, and cardiovascular efficiency, have been vastly enhanced. In addition, techniques such as neural implants, cognitive training programs, and neurogenetic modifications have vastly boosted cognitive enhancements like intelligence, memory, and reaction times.”</p>
+        <p>Tian held his hands up and looked at them. “I would never have believed we could become what we are. It still seems like a dream to me despite the physical and mental suffering we experienced.”</p>
+        <p>“Do you have regrets?”</p>
+        <p>“None! We are the vanguard of the new People’s Liberation Army. There is no one like us on this planet.” His voice rising with excitement, Tian said. “Using sabotage and terror with our new skills and abilities, we will destroy America from within. They will not know how to deal with us!”</p>
+        <p>A brief smile animated Liang’s face. “I’m told your personal best in the bench press is 900 kilos. Yes?”</p>
+        <p>“I matched that in my workout this morning, but I believe I could have handled more.”</p>
+        <p>Liang’s eyes narrowed as he calculated. “That’s almost 2,000 pounds. Excellent. And what is your most recent time for the 100 meters?”</p>
+        <p>“8.51 seconds.”</p>
+        <p>“Also excellent! That combination of strength and speed is inconceivable. As are your cognitive abilities. In addition to your native Mandarin, I am told you speak six languages fluently.”</p>
+        <p>“Yes. English, German, French, Spanish, Arabic, and Farsi.”</p>
+        <p>Another rare smile from Liang. “And all of the men in your unit are similarly talented, yes?”</p>
+        <p>“Yes. There are only differences of a few pounds in the weight room and hundredths of a second in the sprints.”</p>
+        <p>Liang’s eyes narrowed and he stared straight into Tian’s eyes. “So, after all the medical procedures, gene-editing, neurogenetic modifications, and emotional, physical, and psychological stress you and you men have been through, how do you feel?”</p>
+        <p>“Indestructible!” Tian said without hesitation. An image of the Titanic flashed across his mind.</p>
+        <p class="ital">“Excellent, Longhua. The staff at this laboratory assures me you and your men are ready, and I agree. Your unit will begin its journey to the United States quite soon. Let’s review our mission and its purposes once again.”</p>
+        <p>Tian nodded quickly and silently in agreement.</p>
+        <p>“For 4,000 years, it has been China’s destiny to rule this world.” Liang paused and smiled enigmatically like the Mona Lisa. In reference to China’s extra-planetary ambitions and space program, he added, “And perhaps others too.”</p>
+        <p>“Although weakened by its recent political choices, America is still our greatest and most powerful enemy. It would be suicidal on China’s part to engage the West in a conventional war. But the present is clearly the time to wage unconventional warfare. Do you agree, Longhua?”</p>
+        <p>“Yes, General. The American people are deceived by their false sense of security. More than two decades later, they have forgotten their vulnerability on 9/11. Those who do remember think of it as an attack on specific financial and political targets, New York City and Washington, D.C. The ones who don’t live in or near those cities feel safe and secure.”</p>
+        <p>Again the general smiled. “The two greatest dangers to the western world are its people’s ever-shortening memories and their unmerited optimism. You and your Hidden Dragons will soon be loosed in the American heartland, targeting its civilian population physically and psychologically. Those weaklings will be terrified by your genetically-enhanced powers. They’ve never seen anything like you other than in their silly superhero movies and comic books.”</p>
+        <p>Out of respect for the general, Tian sat rigidly at attention, head held high on a muscular neck, eyes sparkling with intellect. His shoulders were broad, his chest deep, his arms and legs stocky with newly developed muscle.</p>
+        <p>“We will redefine the term “terrorism” through the intentional use of violence against America’s civilian population,” he said. “We will spread subversion and propaganda by training, equipping, and advising native resistance fighters and other locals who oppose their government. Through political assassinations, disruption of communications and power grids, commando raids, and other special operations, we will exhaust and destroy the enemy’s will to fight.”</p>
+        <p>General Liang gave a single nod. “Excellent, my young dragon. You and your men are ready for the boldest and most aggressive act in China’s long and glorious history. Have your men ready. Your journey begins tomorrow.”</p>
+    </div>
+    <footer class="ch-end">
+      <p class="ch-end-mark">&#9670;</p>
+      <p class="ch-end-note">End of the advance excerpt. <em>Hidden Dragons, Sleeping Dogs</em> &mdash; the ninth Sleeping Dogs thriller &mdash; releases November 2026.</p>
+      <div class="ch-cta">
+        <a class="btn btn-p" href="#/newsletter">Request release updates <span class="ar">&rarr;</span></a>
+        <a class="btn btn-g" href="#/book/sd-01">Start the series</a>
+      </div>
+    </footer>
+  </article>
+</div>
+
+<!-- ================= APPEARANCES ================= -->
+<div class="view" data-route="appearances">
+  <div class="wrap page-h">
+    <div class="lab">Field schedule</div>
+    <h1 id="page-title">Appearances</h1>
+    <p class="sub">Book signings, library talks, and festival panels &mdash; mostly across Southwest Florida, where the author lives, writes, and logs an unreasonable number of cycling miles.</p>
+  </div>
+  <div class="wrap band narrow" style="padding-top:16px">
+    <div class="tile rv">
+      <div class="t-lab">Scheduling now</div>
+      <h3 style="font-size:26px">Dates to be announced</h3>
+      <p>Confirmed dates, venues, admission details, and signing availability will be listed here as events are scheduled.</p>
+      <p style="margin-top:18px">Upcoming dates are announced to the <a class="inline" href="#/newsletter">newsletter</a> first.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
+        <a class="btn btn-p" href="#/newsletter">Hear about events first <span class="ar">&rarr;</span></a>
+        <a class="btn btn-g" href="#/contact">Propose an event</a>
+      </div>
+    </div>
+    <h3>Invite the author</h3>
+    <p>A former professor and experienced speaker who has presented nationally and internationally, Falbey is available for library programs, book clubs (in person across Southwest Florida, or by video anywhere), bookstore events, and festival panels. Propose an event from the <a class="inline" href="#/contact">contact page</a>, or review the <a class="inline" href="#/media">press materials</a> first.</p>
+  </div>
+</div>
+
+<!-- ================= NEWSLETTER ================= -->
+<div class="view" data-route="newsletter">
+  <div class="wrap page-h">
+    <div class="lab">Secure channel</div>
+    <h1 id="page-title">The newsletter</h1>
+    <p class="sub">Occasional news from John Wayne Falbey: new releases, appearances, and progress on the next book. Request updates below; the author will confirm your subscription.</p>
+  </div>
+  <div class="wrap band" style="padding-top:16px">
+    <div class="split" style="align-items:start">
+      <div class="formcard rv">
+        <form name="newsletter" method="POST" action="/form-handler.php" data-form data-msg="m2" novalidate>
+          <input type="hidden" name="form-name" value="newsletter">
+          <p class="hp" aria-hidden="true"><label>Skip <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="field"><label for="n2">Name</label><input id="n2" type="text" name="name" autocomplete="name" maxlength="160" placeholder="Your name"></div>
+          <div class="field"><label for="e2">Email</label><input id="e2" type="email" name="email" required autocomplete="email" maxlength="254" placeholder="your@email.com"></div>
+          <button class="btn btn-p" type="submit">Request updates <span class="ar">&rarr;</span></button>
+        </form>
+        <p class="formnote" id="m2" role="status"></p>
+        <p class="fineprint">This sends a subscription request to the author; it does not automatically enroll you. The author will confirm your subscription. You can also request updates directly by email.</p>
+      </div>
+      <div class="prose rv">
+        <p><b>Updates from the author include:</b></p>
+        <ul style="list-style:none;margin-top:18px">
+          <li style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted)"><span style="color:var(--brass);font-family:var(--mono);font-size:11px;padding-top:4px">01</span> <span>Launch dates and release updates for new novels</span></li>
+          <li style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted)"><span style="color:var(--brass);font-family:var(--mono);font-size:11px;padding-top:4px">02</span> <span>The <em style="color:var(--text)">Hidden Dragons</em> final cover reveal and future subscriber extras</span></li>
+          <li style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted)"><span style="color:var(--brass);font-family:var(--mono);font-size:11px;padding-top:4px">03</span> <span>Appearance and signing announcements</span></li>
+          <li style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted)"><span style="color:var(--brass);font-family:var(--mono);font-size:11px;padding-top:4px">04</span> <span>Progress notes on books in the works</span></li>
+          <li style="display:flex;gap:12px;padding:12px 0;color:var(--muted)"><span style="color:var(--brass);font-family:var(--mono);font-size:11px;padding-top:4px">05</span> <span>Occasional news from the Dogs' world</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<div class="view" data-route="about">
+  <div class="wrap page-h">
+    <div class="lab">Author of record</div>
+    <h1 id="page-title">John Wayne Falbey</h1>
+  </div>
+  <div class="wrap band" style="padding-top:16px">
+    <div class="split rv" style="margin-bottom:56px">
+      <figure class="portrait">
+        <img src="assets/author-about.jpg" alt="John Wayne Falbey" loading="lazy">
+        <figcaption>The author &middot; Location undisclosed</figcaption>
+      </figure>
+      <div class="prose">
+        <p><b>The name first, since everyone asks:</b> he wasn't named after the Duke. His parents had settled on &ldquo;Wayne&rdquo; &mdash; but at hospital checkout, a nurse insisted every child needed two given names, and his flustered father, John, offered his own. The rest is history.</p>
+        <p>Falbey is a native Floridian, descended on one side from a grandfather who grew citrus along the Halifax, Tomoka, and Indian Rivers. He entered college with vague plans in the sciences that lasted approximately ten minutes into an introductory calculus class, switched to pre-law, and went on to graduate from Vanderbilt University School of Law.</p>
+      </div>
+    </div>
+    <div class="narrow">
+      <p style="color:var(--muted);font-size:16.5px">He spent years practicing transactional law for real estate investors, developers, and lenders &mdash; then crossed the table into development itself. Along the way he added an MBA and a doctorate in business management, and built and chaired a graduate program in real estate development. Between law, business, and academia, he learned the power of words, and the importance of using precisely the right ones.</p>
+      <h3>The writing</h3>
+      <p>He wrote his first novel, <em>The Quixotics</em> &mdash; gunrunning to anti-Castro insurgents in the 1970s Caribbean &mdash; between 1:00 and 3:00 a.m. as a law student. Literary agents later coaxed a second stand-alone out of him, <em>The Taxman Cometh</em>, about a rogue IRS agent who destroys the world of the one man he should have left alone. In 2010 he returned to his first love full-time, and the Sleeping Dogs were born: a series named for Chaucer's six-century-old imperative that it is nought good a sleeping hound to wake.</p>
+      <p>He continues to expand the Sleeping Dogs series. Eight Sleeping Dogs thrillers are in print; the ninth, <em>Hidden Dragons, Sleeping Dogs</em>, <a class="inline" href="#/hidden-dragons">arrives in November 2026</a>. And no &mdash; we haven't heard the last from those Dogs.</p>
+      <h3>The rest of the day</h3>
+      <p>When he isn't writing, he's training &mdash; swimming, cycling, running, and weights, daily &mdash; including, on one memorable occasion, a two-day, 123-mile ride from Miami to Key West. This may explain why the Dogs never seem to get winded.</p>
+      <h3>What reviewers say</h3>
+      <blockquote><p>&ldquo;Falbey offers a bold, gritty spy thriller&rdquo;</p><cite><a href="https://www.kirkusreviews.com/book-reviews/john-wayne-falbey/sleeping-dogs-bQzpUlJR/" target="_blank" rel="noopener">Kirkus Reviews &middot; Sleeping Dogs: The Awakening</a></cite></blockquote>
+      <blockquote><p>&ldquo;Reads like a novel written by a master craftsman. Thoroughly researched, and fast paced.&rdquo;</p><cite>Suzanne Anderson, author</cite></blockquote>
+      <blockquote><p>&ldquo;The last several chapters kept me up long after my flight had landed.&rdquo;</p><cite>Amazon reviewer</cite></blockquote>
+      <h3>Stand-alone thrillers</h3>
+      <p><a class="inline" href="https://books.apple.com/us/book/the-quixotics/id571043172" target="_blank" rel="noopener"><em>The Quixotics</em></a> &nbsp;&middot;&nbsp; <a class="inline" href="https://books.apple.com/us/book/the-taxman-cometh/id1542814845" target="_blank" rel="noopener"><em>The Taxman Cometh</em></a></p>
+      <h3>Elsewhere</h3>
+      <p>Follow on <a class="inline" href="https://www.goodreads.com/author/show/6579094.John_Wayne_Falbey" target="_blank" rel="noopener">Goodreads</a> and <a class="inline" href="https://www.bookbub.com/authors/john-wayne-falbey" target="_blank" rel="noopener">BookBub</a> for new-release alerts. Press, podcasts, and event hosts: the <a class="inline" href="#/media">press kit</a> has everything you need.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MEDIA ================= -->
+<div class="view" data-route="media">
+  <div class="wrap page-h">
+    <div class="lab">Press file</div>
+    <h1 id="page-title">Press kit</h1>
+    <p class="sub">Everything an editor, event host, or podcast producer needs, in one place. For anything not covered here &mdash; interview requests, review copies, high-resolution cover art &mdash; email <a class="inline" href="mailto:wayne@falbeygroup.com">wayne@falbeygroup.com</a>.</p>
+  </div>
+  <div class="wrap band" style="padding-top:16px">
+    <figure class="kit-hero rv"><img src="assets/rainy-night.jpg" alt="" loading="lazy"></figure>
+    <div class="kit-grid rv">
+      <div>
+        <figure class="portrait"><img src="assets/author-headshot.jpg" alt="John Wayne Falbey, author headshot" loading="lazy"></figure>
+        <div class="dl"><a href="assets/author-headshot.jpg" download>Download headshot</a></div>
+      </div>
+      <div>
+        <ul class="facts">
+          <li><b>Genre</b><span>Techno-political thrillers; espionage &amp; geopolitical intrigue</span></li>
+          <li><b>Series</b><span>The Sleeping Dogs &mdash; eight novels (2012&ndash;2024); ninth releasing November 2026</span></li>
+          <li><b>Debut</b><span><em style="color:var(--text)">Sleeping Dogs: The Awakening</em> &mdash; #1 in two Amazon categories; internationally bestselling</span></li>
+          <li><b>Stand-alones</b><span><em style="color:var(--text)">The Quixotics</em>; <em style="color:var(--text)">The Taxman Cometh</em></span></li>
+          <li><b>Comps</b><span>Vince Flynn, Brad Thor, David Baldacci, Daniel Silva</span></li>
+          <li><b>Formats</b><span>Print, ebook, select audiobook editions</span></li>
+          <li><b>Based in</b><span>Southwest Florida</span></li>
+          <li><b>Contact</b><span>wayne@falbeygroup.com</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="narrow" style="max-width:none">
+      <h3>Short bio (~60 words)</h3>
+      <p style="color:var(--muted);max-width:70ch">John Wayne Falbey is the internationally bestselling author of the Sleeping Dogs thrillers &mdash; eight novels of espionage and geopolitical intrigue, with a ninth, <em>Hidden Dragons, Sleeping Dogs</em>, releasing November 2026. His debut, <em>Sleeping Dogs: The Awakening</em>, reached #1 in two Amazon genres. A former transactional attorney and real estate developer, he lives, writes, and trains daily in Southwest Florida.</p>
+      <h3>Long bio</h3>
+      <p style="color:var(--muted);max-width:70ch">John Wayne Falbey writes thrillers set in the contemporary world of international espionage and geopolitical intrigue. A native Floridian, he graduated from Vanderbilt University School of Law and spent years practicing transactional law for real estate investors, developers, and lenders before crossing into development itself &mdash; along the way earning an MBA and a doctorate in business management, and building and chairing a graduate program in real estate development.</p>
+      <p style="color:var(--muted);max-width:70ch">He wrote his first novel, <em>The Quixotics</em>, between 1:00 and 3:00 a.m. as a law student, and returned to fiction full-time in 2010, when the Sleeping Dogs series was born. His debut reached #1 in two Amazon categories on its way to international bestseller status; seven more Sleeping Dogs thrillers have followed, with the ninth, <em>Hidden Dragons, Sleeping Dogs</em>, releasing November 2026. He continues to expand the series and trains daily &mdash; swimming, cycling, running, and weights &mdash; in Southwest Florida.</p>
+      <h3>The covers</h3>
+      <div class="covgrid" id="covGrid"></div>
+      <p class="fineprint">High-resolution cover files available on request: wayne@falbeygroup.com</p>
+      <h3>Interview &amp; event availability</h3>
+      <p style="color:var(--muted);max-width:70ch">A former professor and experienced speaker who has presented nationally and internationally, Falbey is available for print and podcast interviews, library programs, book clubs (in person across Southwest Florida, or by video anywhere), bookstore events, and festival panels. Story angles that reliably land: the accidental &ldquo;John Wayne&rdquo; naming; the attorney-developer who writes bestselling black-ops thrillers; and the research behind the series' gene-editing storyline.</p>
+      <h3>Links</h3>
+      <div class="dl">
+        <a href="og-card.png" download>Web banner</a>
+        <a href="https://www.amazon.com/stores/author/B008ML6X96" target="_blank" rel="noopener">Amazon</a>
+        <a href="https://books.apple.com/us/author/john-wayne-falbey/id538440737" target="_blank" rel="noopener">Apple Books</a>
+        <a href="https://www.goodreads.com/author/show/6579094.John_Wayne_Falbey" target="_blank" rel="noopener">Goodreads</a>
+        <a href="https://www.bookbub.com/authors/john-wayne-falbey" target="_blank" rel="noopener">BookBub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div class="view" data-route="contact">
+  <div class="wrap page-h">
+    <div class="lab">Open channel</div>
+    <h1 id="page-title">Contact</h1>
+    <p class="sub">Reader mail, event proposals, media and rights inquiries &mdash; all of it lands here. Messages are read; replies are made as time between chapters allows.</p>
+  </div>
+  <div class="wrap band" style="padding-top:16px">
+    <div class="formcard rv">
+      <form name="contact" method="POST" action="/form-handler.php" data-form data-msg="m3" novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hp" aria-hidden="true"><label>Skip <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="field"><label for="n3">Name</label><input id="n3" type="text" name="name" autocomplete="name" maxlength="160" placeholder="Your name"></div>
+        <div class="field"><label for="e3">Email</label><input id="e3" type="email" name="email" required autocomplete="email" maxlength="254" placeholder="your@email.com"></div>
+        <div class="field"><label for="t3">Message</label><textarea id="t3" name="message" rows="6" required maxlength="8000" placeholder="For event bookings, include the venue, proposed date, and expected audience."></textarea></div>
+        <button class="btn btn-p" type="submit">Send message <span class="ar">&rarr;</span></button>
+      </form>
+      <p class="formnote" id="m3" role="status"></p>
+      <p class="fineprint">Prefer email? Write directly: <a href="mailto:wayne@falbeygroup.com">wayne@falbeygroup.com</a></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<button type="button" class="cipher" id="cipher" aria-pressed="false" aria-label="Encrypted transmission. Activate to decrypt.">
+  <span class="k">K4 // Intercept</span>
+  <span class="ct">ESPYT YESQT WPTDN ZXTYR STOOP YOCLR ZYDDW PPATY ROZRD</span>
+  <span class="pt">THE NINTH FILE IS COMING &middot; HIDDEN DRAGONS SLEEPING DOGS</span>
+  <span class="cta" id="cipherCta">Decrypt</span>
+</button>
+
+<footer>
+  <div class="foot">
+    <div>
+      <div class="fbrand">John Wayne Falbey</div>
+      <p class="blurb">Eight techno-political thrillers. The ninth arrives November 2026.</p>
+    </div>
+    <div>
+      <h4>Read</h4>
+      <a href="#/series">The series</a>
+      <a href="#/book/sd-01">Start with Book One</a>
+      <a href="#/hidden-dragons">Next release</a><a href="#/excerpt">Read Chapter One</a>
+    </div>
+    <div>
+      <h4>Buy</h4>
+      <a href="https://www.amazon.com/stores/author/B008ML6X96" target="_blank" rel="noopener">Amazon &middot; Kindle</a>
+      <a href="https://books.apple.com/us/author/john-wayne-falbey/id538440737" target="_blank" rel="noopener">Apple Books</a>
+      <a href="https://www.barnesandnoble.com/search?q=John%20Wayne%20Falbey" target="_blank" rel="noopener">Barnes &amp; Noble</a>
+      <a href="https://play.google.com/store/search?q=John%20Wayne%20Falbey&c=books" target="_blank" rel="noopener">Google Play &middot; Audio</a>
+      <a href="https://www.kobo.com/us/en/search?query=john+wayne+falbey" target="_blank" rel="noopener">Kobo</a>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <a href="#/newsletter">Newsletter</a>
+      <a href="#/contact">Contact</a>
+      <a href="#/media">Press kit</a>
+      <a href="https://www.goodreads.com/author/show/6579094.John_Wayne_Falbey" target="_blank" rel="noopener">Goodreads</a>
+      <a href="https://www.bookbub.com/authors/john-wayne-falbey" target="_blank" rel="noopener">BookBub</a>
+    </div>
+  </div>
+  <p class="piracy"><b>A note on piracy:</b> books are the intellectual property of their writers, who depend on legitimate sales to earn a living. Downloading from an illegitimate source is theft of a writer's livelihood. Please don't do that.</p>
+  <div class="legal">&copy; 2026 John Wayne Falbey &middot; All rights reserved &middot; Authorized personnel only</div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* ============ data ============ */
+var BOOKS=[
+ {id:'sd-01',code:'SD-01',n:'01',t:'Sleeping Dogs: The Awakening',y:'2012',tag:'International bestseller',
+  hook:'The president has been marked for assassination \u2014 by his own handlers. The only force that can stop it this late is a unit the government swears doesn\u2019t exist.',
+  syn:['A plot is moving to assassinate the President of the United States \u2014 and it reaches into his own administration. With official channels compromised, a shadow organization known as the Society of Adam Smith goes hunting for the one asset capable of stopping it: a disbanded, officially nonexistent hunter-killer unit called the Sleeping Dogs.',
+       'Their leader, Irish-born, American-raised Brendan Whelan, has spent years in hiding with his family. Now Russian operatives, Ukrainian muscle, and traitors inside the intelligence community are converging on the same secret \u2014 and the Dogs are waking up. The debut that launched the series reached #1 in two Amazon categories on its way to international bestseller status.'],
+  az:'https://www.amazon.com/dp/B008BUYMZA',
+  ap:'https://books.apple.com/us/book/sleeping-dogs/id538440525',bn:'https://www.barnesandnoble.com/w/sleeping-dogs-john-wayne-falbey/1141661188?ean=9798765581322',kb:'https://www.kobo.com/us/en/search?query=Sleeping+Dogs&fcsearchfield=series&seriesId=704e671f-8c71-5b23-915a-30bc3fa6c09a&fclanguages=en&ssId=H3hnXfulGtRe8QbWjQT4Z&sId=3f365abe-9637-4523-869a-4a0e64a134e8',gp:'https://play.google.com/store/search?q=John%20Wayne%20Falbey&c=books'},
+ {id:'sd-02',code:'SD-02',n:'02',t:'Endangered Species',y:'2015',tag:'',
+  hook:'A standing directive orders the Dogs terminated with extreme prejudice. A vengeful FBI agent, a rogue Russian operative, and a monstrous hunter named Maksym intend to deliver.',
+  syn:['The mission is over, but the directive still stands: the Sleeping Dogs are to be terminated with extreme prejudice. Scattered back into hiding, the Dogs find themselves hunted from three directions at once \u2014 a vengeful FBI agent who blames them for his ruin, a rogue Russian operative settling old scores, and a monstrous, seemingly unstoppable hunter named Maksym whose connection to Whelan runs deeper than anyone knows.',
+       'Hunted one by one, the deadliest unit ever built must do the thing it does worst: run. Or the thing it does best.'],
+  az:'https://www.amazon.com/dp/B0B5PWZPCH',
+  ap:'https://books.apple.com/us/book/endangered-species/id873085613',bn:'https://www.barnesandnoble.com/w/endangered-species-john-wayne-falbey/1121277772?ean=9798369222911',kb:'https://www.kobo.com/us/en/ebook/endangered-species-25?sId=23ddec31-3a28-49d5-9673-5e3b47f7aacd&ssId=SwZ0iaasrTLRqAuYh9lQr&cPos=4',gp:'https://play.google.com/store/books/details?id=jiT5DwAAQBAJ'},
+ {id:'sd-03',code:'SD-03',n:'03',t:'The Year of the Dog',y:'2016',tag:'',
+  hook:'Terror cells embedded across the homeland. A pending strike that would leave the nation defenseless. Whelan must get the quarreling Dogs back in the field before the clock runs out.',
+  syn:['Terror cells lie embedded across the American homeland, waiting on a signal \u2014 and the strike they\u2019re waiting for is designed to leave the nation defenseless. Abroad, China consolidates its dominion across Asia while Russia menaces Europe; at home, the people who should be stopping it are compromised, complacent, or worse.',
+       'Brendan Whelan has one option: pull the quarreling, scattered Dogs back into the field and unleash the Hounds of Hell before the clock runs out. Getting them to work together again may be harder than the mission itself.'],
+  az:'https://www.amazon.com/dp/B01MXDI4N2',
+  ap:'https://books.apple.com/us/book/the-year-of-the-dog/id1181030324',bn:'https://www.barnesandnoble.com/w/the-year-of-the-dog-john-wayne-falbey/1125092688?ean=2940157109189'},
+ {id:'sd-04',code:'SD-04',n:'04',t:'The Dogs of War',y:'2017',tag:'',
+  hook:'Six nuclear devices on American soil \u2014 the first aimed at Los Alamos. The Society of Adam Smith needs the Dogs reunited, while Whelan\u2019s rogue brother Maksym hunts his family.',
+  syn:['Six nuclear devices have been smuggled onto American soil, and the first is aimed at Los Alamos. Behind them stands the Alliance for Global Unity, orchestrating chaos from Beijing to Moscow to Tehran in pursuit of a new world order with itself at the top.',
+       'The Society of Adam Smith needs the Dogs reunited \u2014 and reinforced, with a new Australian operative joining the pack \u2014 while Whelan fights a war on a second front: his rogue brother Maksym is hunting his family in Ireland. Some debts between brothers can only be settled one way.'],
+  az:'https://www.amazon.com/dp/0998611700',
+  ap:'https://books.apple.com/us/book/the-dogs-of-war/id1225379309',gp:'https://play.google.com/store/books/details/John_Wayne_Falbey_The_Dogs_of_War?id=FVz5DwAAQBAJ'},
+ {id:'sd-05',code:'SD-05',n:'05',t:'A Deadlier Breed',y:'2018',tag:'',
+  hook:'Beijing has armed jihadists with five tactical nukes bound for U.S. cities. To avoid catastrophic panic, an unconventional president quietly wakes the Dogs.',
+  syn:['Beijing has quietly armed jihadist operatives with five tactical nuclear weapons \u2014 and five American cities are on the target list. A conventional response would mean public panic, market collapse, and war. An unconventional president chooses an unconventional answer: wake the Dogs, and keep it off the books.',
+       'What follows is a silent, continent-spanning hunt in which the hunters cannot be seen, the clock cannot be stopped, and failure cannot be survived.'],
+  az:'https://www.amazon.com/dp/0998611735',
+  ap:'https://books.apple.com/us/book/a-deadlier-breed/id1437011337',bn:'https://www.barnesandnoble.com/w/a-deadlier-breed-john-wayne-falbey/1141949927?ean=2940161972571'},
+ {id:'sd-06',code:'SD-06',n:'06',t:'The Devil\u2019s Litter',y:'2019',tag:'Origin story',
+  hook:'How were they found? How were they forged? And what happens when the government that built the deadliest unit in history decides to erase it?',
+  syn:['Before the betrayal, there was the forging. Nineteen extraordinary individuals were identified and recruited by a program buried so deep it officially never existed. Fifteen survived the selection. Six remained when the training was done \u2014 the six who would become the deadliest covert-operations unit in history.',
+       'The Devil\u2019s Litter is the origin story: how the Dogs were found, how they were made, the missions that forged them into a pack \u2014 and the government decision that turned their own country into their most dangerous enemy. It can be read first, or read sixth; either way, it explains everything.'],
+  az:'https://www.amazon.com/stores/author/B008ML6X96',
+  ap:'https://books.apple.com/us/book/the-devils-litter/id1490912095',bn:'https://www.barnesandnoble.com/w/the-devils-litter-john-wayne-falbey/1137586809?ean=2940162931256',gp:'https://play.google.com/store/books/details?id=lVz5DwAAQBAJ'},
+ {id:'sd-07',code:'SD-07',n:'07',t:'The People\u2019s Republic of America',y:'2022',tag:'',
+  hook:'Washington believes it shares a pact with Beijing to divide the world order. Beijing has other plans: an unstoppable pathogen, the world\u2019s best assassins \u2014 and Whelan\u2019s wife as bait.',
+  syn:['Factions inside the American government believe they\u2019ve struck a quiet accord with Beijing: share dominion over the world order, and divide the spoils. Beijing has other plans. Its side of the bargain includes an engineered pathogen with no counter, the world\u2019s most capable assassins \u2014 and no intention of sharing anything.',
+       'When Whelan\u2019s wife is taken as bait, the mission stops being geopolitical. The six other Dogs know exactly what happens next; they\u2019ve just never had to do it with the whole world at stake.'],
+  az:'https://www.amazon.com/dp/B0B136S69P',
+  ap:'https://books.apple.com/us/book/the-peoples-republic-of-america/id6442791355',bn:'https://www.barnesandnoble.com/w/the-peoples-republic-of-america-john-wayne-falbey/1141458976?ean=2940160862125',kb:'https://www.kobo.com/us/en/ebook/the-people-s-republic-of-america?sId=db119768-a0ff-47db-83b0-8853c3b4a72d&ssId=rG6QVJUmZGx67qNOau0kG&cPos=1'},
+ {id:'sd-08',code:'SD-08',n:'08',t:'Spare Me, Kill the Rest',y:'2024',tag:'Latest release',
+  hook:'A third-party candidate the Deep State can\u2019t control. A leader framed for murder and buried in a secret supermax. The Dogs must break Whelan out \u2014 then pull off an impossible rescue.',
+  syn:['A third-party presidential candidate is surging \u2014 one the entrenched powers can\u2019t buy, blackmail, or control. So he disappears, taken by Russian mercenaries working at the Deep State\u2019s convenience. When Brendan Whelan gets too close to the truth, he\u2019s framed for murder and buried alive in a supermax facility that doesn\u2019t officially exist.',
+       'The remaining Dogs face a two-stage impossibility: break their leader out of the most secure prison ever built, then find and free a candidate the most powerful people in the world need to stay lost.'],
+  az:'https://www.amazon.com/dp/B0CYTNVC7B',
+  ap:'https://books.apple.com/us/book/spare-me-kill-the-rest/id6479809580',bn:'https://www.barnesandnoble.com/w/spare-me-kill-the-rest-john-wayne-falbey/1145199187?ean=2940185636992',kb:'https://www.kobo.com/us/en/ebook/spare-me-kill-the-rest-1?sId=06002655-564e-4eec-b043-f20836fd6c18&ssId=m5JBlXoen1Lr_geJ9EnSR&cPos=9'}
+];
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function wide(t){var q=encodeURIComponent(t+' falbey');return{
+  bn:'https://www.barnesandnoble.com/s/'+q,kobo:'https://www.kobo.com/us/en/search?query='+q,
+  gp:'https://play.google.com/store/search?q='+q+'&c=books'}}
+
+/* ============ ticker ============ */
+(function(){
+  var items=['Department X // Special Operations Group','Status // Active','SD-09 // Hidden Dragons \u2014 November 2026',
+    'Book One // Ebook from US$0.99','Designation // Homo maximus','Eight files // Declassified',
+    'Southwest Florida // Events scheduling now'];
+  var row=items.map(function(i){return '<span><b>'+i+'</b></span>'}).join('');
+  var t=document.getElementById('tick'); if(t) t.innerHTML=row+row;
+})();
+
+/* ============ cards ============ */
+function card(b){
+  return '<article class="file rv" data-file="'+b.id+'" '
+      +'aria-label="'+esc(b.t)+', case file '+b.code+'">'
+    +'<span class="tab">'+b.code+'</span>'
+    +'<div class="file-cov">'
+      +'<img src="covers/'+b.id+'.jpg" alt="'+esc(b.t)+' cover" loading="lazy" onerror="this.remove()">'
+      +'<div class="sheet" aria-hidden="true">'
+        +'<div class="sheet-band">Classified</div>'
+        +'<div class="sheet-mid"><div class="sm-no">'+b.code+'</div><div class="sm-rule"></div>'
+          +'<div class="sm-note">Authorized personnel only</div></div>'
+        +'<div class="sheet-band">Do not reproduce</div>'
+      +'</div>'
+      +'<span class="sweep" aria-hidden="true"></span>'
+      +'<span class="file-yr">'+b.y+'</span>'
+      +'<span class="stamp">Declassified</span>'
+    +'</div>'
+    +'<div class="file-body">'
+      +'<h3>'+esc(b.t)+'</h3>'
+      +'<p class="file-hook"><span class="redact">'+esc(b.hook)+'</span></p>'
+      +'<p class="hint">Hover or tap to declassify</p>'
+      +'<div class="file-act">'
+        +'<a class="file-open" href="#/book/'+b.id+'">Open file <span>&rarr;</span></a>'
+        +'<span class="buy-mini">'
+          +(b.az?'<a href="'+b.az+'" target="_blank" rel="noopener" title="Amazon" aria-label="Buy on Amazon">A</a>':'')
+          +'<a href="'+b.ap+'" target="_blank" rel="noopener" title="Apple Books" aria-label="Buy on Apple Books">&#63743;</a>'
+        +'</span>'
+      +'</div>'
+    +'</div></article>';
+}
+function fill(id,list){var el=document.getElementById(id);if(el&&!el.dataset.done){el.innerHTML=list.map(card).join('');el.dataset.done='1'}}
+
+/* ============ book page ============ */
+function renderBook(id){
+  var i=-1;for(var k=0;k<BOOKS.length;k++){if(BOOKS[k].id===id){i=k;break}}
+  if(i<0){go('series');return}
+  var b=BOOKS[i],w=wide(b.t),p=BOOKS[(i+BOOKS.length-1)%BOOKS.length],n=BOOKS[(i+1)%BOOKS.length];
+  document.getElementById('bookView').innerHTML=
+   '<a class="crumb" href="#/series">&larr; All case files</a>'
+   +'<div class="bk">'
+     +'<div class="bk-cov" id="bkCov">'
+       +'<img src="covers/'+b.id+'.jpg" alt="'+esc(b.t)+' cover" onerror="bkFallback(this)">'
+     +'</div>'
+     +'<div>'
+       +'<div class="lab" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);margin-bottom:14px">Case file '+b.code+'</div>'
+       +'<h1 id="page-title">'+esc(b.t)+'</h1>'
+       +'<p class="bookmeta">Book '+parseInt(b.n,10)+' of 8 in the Sleeping Dogs series'
+         +' &nbsp;&middot;&nbsp; First published '+b.y
+         +(b.tag?' &nbsp;&middot;&nbsp; '+esc(b.tag):'')
+         +' &nbsp;&middot;&nbsp; Formats vary by retailer</p>'
+       +'<div class="syn">'+b.syn.map(function(s){return '<p>'+esc(s)+'</p>'}).join('')+'</div>'
+       +'<p class="buyhead">Get the book</p>'
+       +'<div class="buys">'
+         +(b.az?'<a class="p" href="'+b.az+'" target="_blank" rel="noopener">Amazon</a>':'')
+         +'<a href="'+b.ap+'" target="_blank" rel="noopener">Apple Books</a>'
+         +(b.bn?'<a href="'+b.bn+'" target="_blank" rel="noopener">Barnes &amp; Noble</a>':'')
+         +(b.kb?'<a href="'+b.kb+'" target="_blank" rel="noopener">Kobo</a>':'')
+         +(b.gp?'<a href="'+b.gp+'" target="_blank" rel="noopener">Google Play</a>':'')
+       +'</div>'
+     +'<p class="allbooks">See every title: <a href="https://www.amazon.com/stores/author/B008ML6X96" target="_blank" rel="noopener">all books on Amazon</a> &middot; <a href="https://books.apple.com/us/author/john-wayne-falbey/id538440737" target="_blank" rel="noopener">all books on Apple Books</a></p>'
+     +'</div>'
+   +'</div>'
+   +'<div class="pager">'
+     +(i>0?'<a href="#/book/'+p.id+'"><div class="d">&larr; Previous file</div><div class="t">'+esc(p.t)+'</div></a>':'<a href="#/series"><div class="d">&larr; Reading order</div><div class="t">The complete series</div></a>')
+     +(i<BOOKS.length-1?'<a class="nx" href="#/book/'+n.id+'"><div class="d">Next file &rarr;</div><div class="t">'+esc(n.t)+'</div></a>':'<a class="nx" href="#/hidden-dragons"><div class="d">Next release &rarr;</div><div class="t">Hidden Dragons, Sleeping Dogs</div></a>')
+   +'</div>';
+}
+function bkFallback(img){
+  var b=null,h=location.hash;
+  for(var k=0;k<BOOKS.length;k++){if(h.indexOf(BOOKS[k].id)>-1){b=BOOKS[k];break}}
+  var box=document.getElementById('bkCov');
+  if(box&&b){box.innerHTML='<div class="bk-fallback"><div class="ft">'+esc(b.t)+'</div><div class="fa">John Wayne Falbey</div></div>'}
+}
+
+/* ============ media kit covers ============ */
+function fillCovers(){
+  var g=document.getElementById('covGrid');
+  if(g&&!g.dataset.done){
+    g.innerHTML=BOOKS.map(function(b){
+      return '<a href="#/book/'+b.id+'" aria-label="Open file '+b.code+', '+esc(b.t)+'">'
+        +'<img src="covers/'+b.id+'.jpg" alt="'+esc(b.t)+' cover" loading="lazy" onerror="this.parentNode.remove()"></a>'
+    }).join('');
+    g.dataset.done='1';
+  }
+}
+
+/* ============ stars ============ */
+(function(){
+  var pattern=[1,0,2,0,0,1,0,2,0,1,0,0,2,1,0,0,2,1,1]; // 1=active 2=lost 0=stood down
+  var s=document.getElementById('stars');
+  if(s) s.innerHTML=pattern.map(function(p){
+    return '<i class="'+(p===1?'act':p===2?'lost':'')+'">\u2605</i>'}).join('');
+})();
+
+/* ============ launch countdown (set date to activate) ============ */
+/* Release countdown: fill in date (YYYY-MM-DD) + preorder URLs to activate.
+   Release is set for November 2026; exact day pending. Leave blank to keep hidden. */
+var LAUNCH={date:'',amazon:'',apple:''};
+function renderLaunch(){
+  var slot=document.getElementById('launchSlot'); if(!slot)return;
+  if(!LAUNCH.date){slot.innerHTML='';return}
+  var d=Math.max(0,Math.ceil((new Date(LAUNCH.date+'T00:00:00')-new Date())/864e5));
+  slot.innerHTML='<div class="tile" style="margin-bottom:34px"><div class="t-lab"><span class="dot"></span> Launch window confirmed</div>'
+   +'<h3>'+(d>0?d+' days':'Out now')+'</h3><p>'+(d>0?'Releases '+LAUNCH.date+'. Reserve your copy now.':'Available at all major retailers.')+'</p>'
+   +'<div class="buys" style="margin-top:22px">'
+   +(LAUNCH.amazon?'<a class="p" href="'+LAUNCH.amazon+'" target="_blank" rel="noopener">'+(d>0?'Preorder':'Buy')+' \u2014 Amazon</a>':'')
+   +(LAUNCH.apple?'<a href="'+LAUNCH.apple+'" target="_blank" rel="noopener">Apple Books</a>':'')+'</div></div>';
+}
+
+/* Keep links from the previous hash-based site working. */
+(function(){
+  if(!location.hash.startsWith('#/'))return;
+  var old=location.hash.slice(2).replace(/\/$/,'');
+  var route=old.split('/')[0];
+  var routes={home:'/',series:'/series/',book:'/books/', 'hidden-dragons':'/hidden-dragons/',excerpt:'/sample-chapter/',appearances:'/appearances/',newsletter:'/newsletter/',about:'/about/',media:'/press/',contact:'/contact/'};
+  var target=routes[route]||'/';
+  if(route==='book')target=/^sd-0[1-8]$/.test(old.split('/')[1]||'')?'/books/'+old.split('/')[1]+'/':'/series/';
+  if(route==='excerpt'&&old.split('/')[1]==='chapter-one')target+='#chapter-one';
+  location.replace(target);
+})();
+
+/* ============ reader-controlled promotional trailers ============ */
+document.querySelectorAll('[data-play-trailer]').forEach(function(button){
+  var video=document.getElementById(button.getAttribute('data-play-trailer'));
+  button.addEventListener('click',function(){
+    var promise=video.play();
+    if(promise)promise.catch(function(){button.hidden=false;});
+  });
+  video.addEventListener('play',function(){button.hidden=true;});
+  video.addEventListener('pause',function(){button.hidden=false;});
+  video.addEventListener('ended',function(){button.hidden=false;});
+});
+
+/* ============ accessible mobile menu ============ */
+var navEl=document.getElementById('nav');
+var links=document.getElementById('links'),burger=document.getElementById('burger');
+var menuBackground=Array.from(document.querySelectorAll('main,footer,.statusbar,.cipher,.skip-link'));
+function closeMenu(returnFocus){
+  var wasOpen=links.classList.contains('open');
+  links.classList.remove('open');navEl.classList.remove('menu-open');document.body.classList.remove('menu-locked');
+  links.removeAttribute('role');links.removeAttribute('aria-modal');links.removeAttribute('aria-label');
+  burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-label','Open menu');
+  menuBackground.forEach(function(el){el.inert=false});
+  if(returnFocus&&wasOpen)burger.focus();
+}
+function openMenu(){
+  links.classList.add('open');navEl.classList.add('menu-open');document.body.classList.add('menu-locked');
+  links.setAttribute('role','dialog');links.setAttribute('aria-modal','true');links.setAttribute('aria-label','Navigation menu');
+  burger.setAttribute('aria-expanded','true');burger.setAttribute('aria-label','Close menu');
+  menuBackground.forEach(function(el){el.inert=true});
+  document.getElementById('closer').focus();
+}
+burger.addEventListener('click',function(){links.classList.contains('open')?closeMenu(true):openMenu()});
+document.getElementById('closer').addEventListener('click',function(){closeMenu(true)});
+document.addEventListener('keydown',function(e){
+  if(!links.classList.contains('open'))return;
+  if(e.key==='Escape'){e.preventDefault();closeMenu(true);return}
+  if(e.key!=='Tab')return;
+  var items=Array.from(links.querySelectorAll('a,button')).filter(function(el){return el.getClientRects().length});
+  var first=items[0],last=items[items.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+});
+window.matchMedia('(min-width:901px)').addEventListener('change',function(e){if(e.matches)closeMenu(false)});
+window.addEventListener('pageshow',function(){closeMenu(false)});
+
+/* ============ accurately reported contact / subscription requests ============ */
+document.querySelectorAll('form[data-form]').forEach(function(form){
+  var msg=document.getElementById(form.getAttribute('data-msg'));
+  form.querySelectorAll('input,textarea').forEach(function(field){
+    if(field.name==='bot-field')return;
+    field.setAttribute('aria-describedby',msg.id);
+    field.addEventListener('input',function(){field.removeAttribute('aria-invalid')});
+  });
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    var email=form.querySelector('input[type="email"]'), message=form.querySelector('textarea');
+    var button=form.querySelector('button[type="submit"]');
+    if(button.disabled)return;
+    function invalid(field,text){msg.textContent=text;field.setAttribute('aria-invalid','true');field.focus()}
+    if(!email.validity.valid||!email.value.trim()){invalid(email,'Enter a valid email address.');return}
+    if(message&&!message.value.trim()){invalid(message,'Add a message before sending.');return}
+    button.disabled=true;form.setAttribute('aria-busy','true');msg.textContent='Sending your request…';
+    var controller=new AbortController();var timeout=setTimeout(function(){controller.abort()},15000);
+    try{
+      var response=await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded','Accept':'application/json'},body:new URLSearchParams(new FormData(form)).toString(),signal:controller.signal});
+      var data=await response.json().catch(function(){return null});
+      if(!data)throw new Error('The form is temporarily unavailable.');
+      if(!response.ok||data.ok!==true){var failure=new Error(data.message||'Your request could not be sent.');failure.readerMessage=true;throw failure}
+      msg.textContent=data.message;form.reset();
+    }catch(error){
+      var explanation=error.name==='AbortError'?'The request timed out.':error.readerMessage?error.message:'The form is temporarily unavailable.';
+      msg.textContent=explanation+(explanation.indexOf('wayne@falbeygroup.com')<0?' You can email wayne@falbeygroup.com directly.':'');
+    }finally{clearTimeout(timeout);button.disabled=false;form.removeAttribute('aria-busy')}
+  });
+});
+
+/* ============ file tap + cipher ============ */
+document.addEventListener('click',function(e){
+  var f=e.target.closest&&e.target.closest('.file');
+  if(f&&!(e.target.closest('a'))) f.classList.toggle('open');
+});
+var cip=document.getElementById('cipher');
+cip.addEventListener('click',function(){
+  var on=cip.classList.toggle('dec');
+  cip.setAttribute('aria-pressed',on?'true':'false');
+  cip.setAttribute('aria-label',on?'Decoded transmission: The ninth file is coming. Hidden Dragons, Sleeping Dogs. Activate to encrypt.':'Encrypted transmission. Activate to decrypt.');
+  var c=document.getElementById('cipherCta'); if(c)c.textContent=on?'Encrypt':'Decrypt';
+});
+
+/* ============ spotlight ============ */
+document.addEventListener('mousemove',function(e){
+  var t=e.target.closest&&e.target.closest('.spot');
+  if(!t)return;
+  var r=t.getBoundingClientRect();
+  t.style.setProperty('--mx',(e.clientX-r.left)+'px');
+  t.style.setProperty('--my',(e.clientY-r.top)+'px');
+});
+
+/* ============ reveal / counters / meters ============ */
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function countUp(el){
+  if(el.dataset.done)return; el.dataset.done='1';
+  var target=parseInt(el.getAttribute('data-count'),10);
+  if(reduced){el.textContent=target;return}
+  var t0=null,dur=1500;
+  function step(t){
+    if(!t0)t0=t;
+    var p=Math.min((t-t0)/dur,1);
+    el.textContent=Math.round((1-Math.pow(1-p,3))*target);
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var io=null;
+if('IntersectionObserver' in window){
+  io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var el=en.target;
+      el.classList.add('in');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+      el.querySelectorAll('[data-meter]').forEach(function(m){m.classList.add('go')});
+      if(el.id==='mon'){
+        var st=document.getElementById('stars');
+        if(st){
+          st.classList.add('lit');
+          [].forEach.call(st.children,function(c,i){c.style.transitionDelay=(i*45)+'ms'});
+        }
+      }
+      io.unobserve(el);
+    });
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+}
+function scan(){
+  var root=document.querySelector('.view.on')||document;
+  var els=root.querySelectorAll('.rv:not(.in)');
+  if(!io){
+    els.forEach(function(el){el.classList.add('in')});
+    root.querySelectorAll('[data-count]').forEach(function(c){c.textContent=c.getAttribute('data-count')});
+    root.querySelectorAll('[data-meter]').forEach(function(m){m.classList.add('go')});
+    var st=document.getElementById('stars'); if(st)st.classList.add('lit');
+    return;
+  }
+  els.forEach(function(el,i){el.style.transitionDelay=Math.min(i%3,2)*70+'ms';io.observe(el)});
+}
+
+/* ============ scroll fx ============ */
+var nav=document.getElementById('nav'),prog=document.getElementById('prog'),hero=document.getElementById('heroImg');
+var ticking=false;
+function onScroll(){
+  if(ticking)return; ticking=true;
+  requestAnimationFrame(function(){
+    var y=window.scrollY||0;
+    nav.classList.toggle('stuck',y>10);
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(h>0?(y/h)*100:0)+'%';
+    if(hero&&!reduced&&y<900) hero.style.transform='translateY('+(y*0.22)+'px)';
+    ticking=false;
+  });
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+
+/* ============ boot ============ */
+scan();
+onScroll();
+</script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+{
+  "sd-01": {
+    "az": "https://www.amazon.com/dp/B008BUYMZA",
+    "ap": "https://books.apple.com/us/book/sleeping-dogs/id538440525",
+    "bn": "https://www.barnesandnoble.com/w/sleeping-dogs-john-wayne-falbey/1141661188?ean=9798765581322",
+    "kb": null,
+    "gp": "https://play.google.com/store/books/details?id=DCP5DwAAQBAJ",
+    "_title": "Sleeping Dogs: The Awakening",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.amazon.com/dp/B008BUYMZA"
+        ],
+        "note": "HTTP 200 returned a generic Amazon page without product title. Do not describe this as independently verified. Preserved existing author-supplied ASIN."
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎Sleeping Dogs by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/sleeping-dogs/id538440525"
+        ]
+      },
+      "bn": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "Sleeping Dogs: The Awakening:A Sleeping Dogs Thriller | Barnes &amp; Noble®",
+        "provenance": [
+          "https://www.barnesandnoble.com/w/sleeping-dogs-john-wayne-falbey/1141661188?ean=9798765581322"
+        ]
+      },
+      "kb": {
+        "verified": false,
+        "status": "no_verified_direct_url",
+        "provenance": [],
+        "recommendation": "Omit this retailer button from the book detail page; keep clearly labeled author catalog links in footer or all-books row."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "Sleeping Dogs: The Awakening by John Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=DCP5DwAAQBAJ"
+        ]
+      }
+    }
+  },
+  "sd-02": {
+    "az": "https://www.amazon.com/dp/B0B5PWZPCH",
+    "ap": "https://books.apple.com/us/book/endangered-species/id873085613",
+    "bn": "https://www.barnesandnoble.com/w/endangered-species-john-wayne-falbey/1121277772?ean=9798369222911",
+    "kb": "https://www.kobo.com/us/en/ebook/endangered-species-25",
+    "gp": "https://play.google.com/store/books/details?id=jiT5DwAAQBAJ",
+    "_title": "Endangered Species",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.amazon.com/dp/B0B5PWZPCH"
+        ],
+        "note": "HTTP 200 returned a generic Amazon page without product title. Do not describe this as independently verified. Preserved existing author-supplied ASIN."
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎ENDANGERED SPECIES by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/endangered-species/id873085613"
+        ]
+      },
+      "bn": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "Endangered Species: A Sleeping Dogs Thriller | Barnes &amp; Noble®",
+        "provenance": [
+          "https://www.barnesandnoble.com/w/endangered-species-john-wayne-falbey/1121277772?ean=9798369222911"
+        ]
+      },
+      "kb": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.kobo.com/us/en/ebook/endangered-species-25?sId=23ddec31-3a28-49d5-9673-5e3b47f7aacd&ssId=SwZ0iaasrTLRqAuYh9lQr&cPos=4"
+        ],
+        "note": "Removed tracking query parameters. Kobo blocks automated live checks; existing direct author-supplied product URL retained."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "Endangered Species: A Sleeping Dogs Thriller by John Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=jiT5DwAAQBAJ"
+        ]
+      }
+    }
+  },
+  "sd-03": {
+    "az": "https://www.amazon.com/dp/B01MXDI4N2",
+    "ap": "https://books.apple.com/us/book/the-year-of-the-dog/id1181030324",
+    "bn": "https://www.barnesandnoble.com/w/the-year-of-the-dog-john-wayne-falbey/1125092688?ean=2940157109189",
+    "kb": null,
+    "gp": "https://play.google.com/store/books/details?id=pCT5DwAAQBAJ",
+    "_title": "The Year of the Dog",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.amazon.com/dp/B01MXDI4N2"
+        ],
+        "note": "HTTP 200 returned a generic Amazon page without product title. Do not describe this as independently verified. Preserved existing author-supplied ASIN."
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎The Year Of The Dog by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/the-year-of-the-dog/id1181030324"
+        ]
+      },
+      "bn": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "The Year Of The Dog | Barnes &amp; Noble®",
+        "provenance": [
+          "https://www.barnesandnoble.com/w/the-year-of-the-dog-john-wayne-falbey/1125092688?ean=2940157109189"
+        ]
+      },
+      "kb": {
+        "verified": false,
+        "status": "no_verified_direct_url",
+        "provenance": [],
+        "recommendation": "Omit this retailer button from the book detail page; keep clearly labeled author catalog links in footer or all-books row."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "The Year of the Dog: A Sleeping Dogs Thriller by John Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=pCT5DwAAQBAJ"
+        ]
+      }
+    }
+  },
+  "sd-04": {
+    "az": "https://www.amazon.com/dp/0998611700",
+    "ap": "https://books.apple.com/us/book/the-dogs-of-war/id1225379309",
+    "bn": null,
+    "kb": null,
+    "gp": "https://play.google.com/store/books/details?id=FVz5DwAAQBAJ",
+    "_title": "The Dogs of War",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.amazon.com/dp/0998611700"
+        ],
+        "note": "HTTP 200 returned a generic Amazon page without product title. Do not describe this as independently verified. Preserved existing author-supplied ASIN."
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎The Dogs of War by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/the-dogs-of-war/id1225379309"
+        ]
+      },
+      "bn": {
+        "verified": false,
+        "status": "no_verified_direct_url",
+        "provenance": [],
+        "recommendation": "Omit this retailer button from the book detail page; keep clearly labeled author catalog links in footer or all-books row.",
+        "note": "No verified direct product URL found. Existing code generated a title search fallback."
+      },
+      "kb": {
+        "verified": false,
+        "status": "no_verified_direct_url",
+        "provenance": [],
+        "recommendation": "Omit this retailer button from the book detail page; keep clearly labeled author catalog links in footer or all-books row."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "The Dogs of War: A Sleeping Dogs Thriller by John Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=FVz5DwAAQBAJ"
+        ]
+      }
+    }
+  },
+  "sd-05": {
+    "az": "https://www.amazon.com/dp/0998611735",
+    "ap": "https://books.apple.com/us/book/a-deadlier-breed/id1437011337",
+    "bn": "https://www.barnesandnoble.com/w/a-deadlier-breed-john-wayne-falbey/1141949927?ean=2940161972571",
+    "kb": null,
+    "gp": "https://play.google.com/store/books/details?id=fVz5DwAAQBAJ",
+    "_title": "A Deadlier Breed",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.amazon.com/dp/0998611735"
+        ],
+        "note": "HTTP 200 returned a generic Amazon page without product title. Do not describe this as independently verified. Preserved existing author-supplied ASIN."
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎A Deadlier Breed by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/a-deadlier-breed/id1437011337"
+        ]
+      },
+      "bn": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "A Deadlier Breed: A Sleeping Dogs Thriller | Barnes &amp; Noble®",
+        "provenance": [
+          "https://www.barnesandnoble.com/w/a-deadlier-breed-john-wayne-falbey/1141949927?ean=2940161972571"
+        ]
+      },
+      "kb": {
+        "verified": false,
+        "status": "no_verified_direct_url",
+        "provenance": [],
+        "recommendation": "Omit this retailer button from the book detail page; keep clearly labeled author catalog links in footer or all-books row."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "A Deadlier Breed: A Sleeping Dogs Thriller by John Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=fVz5DwAAQBAJ"
+        ]
+      }
+    }
+  },
+  "sd-06": {
+    "az": null,
+    "ap": "https://books.apple.com/us/book/the-devils-litter/id1490912095",
+    "bn": "https://www.barnesandnoble.com/w/the-devils-litter-john-wayne-falbey/1137586809?ean=2940162931256",
+    "kb": null,
+    "gp": "https://play.google.com/store/books/details?id=lVz5DwAAQBAJ",
+    "_title": "The Devil\\u2019s Litter",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "no_verified_direct_url",
+        "provenance": [],
+        "recommendation": "Omit this retailer button from the book detail page; keep clearly labeled author catalog links in footer or all-books row.",
+        "note": "Existing Amazon link is the author storefront, not this book. Public storefront returned HTTP 503, and searches did not identify a reliable direct ASIN. Do not invent one.",
+        "browse_fallback": {
+          "label": "Browse author on Amazon",
+          "url": "https://www.amazon.com/stores/author/B008ML6X96"
+        }
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎The Devil's Litter by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/the-devils-litter/id1490912095"
+        ]
+      },
+      "bn": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "The Devil&#x27;s Litter | Barnes &amp; Noble®",
+        "provenance": [
+          "https://www.barnesandnoble.com/w/the-devils-litter-john-wayne-falbey/1137586809?ean=2940162931256"
+        ]
+      },
+      "kb": {
+        "verified": false,
+        "status": "no_verified_direct_url",
+        "provenance": [],
+        "recommendation": "Omit this retailer button from the book detail page; keep clearly labeled author catalog links in footer or all-books row."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "The Devil&#39;s Litter: A Sleeping Dogs Thriller by john Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=lVz5DwAAQBAJ"
+        ]
+      }
+    }
+  },
+  "sd-07": {
+    "az": "https://www.amazon.com/dp/B0B136S69P",
+    "ap": "https://books.apple.com/us/book/the-peoples-republic-of-america/id6442791355",
+    "bn": "https://www.barnesandnoble.com/w/the-peoples-republic-of-america-john-wayne-falbey/1141458976?ean=2940160862125",
+    "kb": "https://www.kobo.com/us/en/ebook/the-people-s-republic-of-america",
+    "gp": "https://play.google.com/store/books/details?id=MMVxEAAAQBAJ",
+    "_title": "The People\\u2019s Republic of America",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.amazon.com/dp/B0B136S69P"
+        ],
+        "note": "HTTP 200 returned a generic Amazon page without product title. Do not describe this as independently verified. Preserved existing author-supplied ASIN."
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎The People's Republic of America by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/the-peoples-republic-of-america/id6442791355"
+        ]
+      },
+      "bn": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "The People&#x27;s Republic of America: A Sleeping Dogs Thriller | Barnes &amp; Noble®",
+        "provenance": [
+          "https://www.barnesandnoble.com/w/the-peoples-republic-of-america-john-wayne-falbey/1141458976?ean=2940160862125"
+        ]
+      },
+      "kb": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.kobo.com/us/en/ebook/the-people-s-republic-of-america?sId=db119768-a0ff-47db-83b0-8853c3b4a72d&ssId=rG6QVJUmZGx67qNOau0kG&cPos=1"
+        ],
+        "note": "Removed tracking query parameters. Kobo blocks automated live checks; existing direct author-supplied product URL retained."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "The People&#39;s Republic of America: A Sleeping Dogs Thriller by John Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=MMVxEAAAQBAJ"
+        ]
+      }
+    }
+  },
+  "sd-08": {
+    "az": "https://www.amazon.com/dp/B0CYTNVC7B",
+    "ap": "https://books.apple.com/us/book/spare-me-kill-the-rest/id6479809580",
+    "bn": "https://www.barnesandnoble.com/w/spare-me-kill-the-rest-john-wayne-falbey/1145199187?ean=2940185636992",
+    "kb": "https://www.kobo.com/us/en/ebook/spare-me-kill-the-rest-1",
+    "gp": "https://play.google.com/store/books/details?id=LcIDEQAAQBAJ",
+    "_title": "Spare Me, Kill the Rest",
+    "_checked": "2026-09-15",
+    "_verification": {
+      "az": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.amazon.com/dp/B0CYTNVC7B"
+        ],
+        "note": "HTTP 200 returned a generic Amazon page without product title. Do not describe this as independently verified. Preserved existing author-supplied ASIN."
+      },
+      "ap": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "‎Spare Me, Kill the Rest by John Wayne Falbey on Apple Books",
+        "provenance": [
+          "https://books.apple.com/us/book/spare-me-kill-the-rest/id6479809580"
+        ]
+      },
+      "bn": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "Spare Me, Kill the Rest: A Sleeping Dogs Thriller | Barnes &amp; Noble®",
+        "provenance": [
+          "https://www.barnesandnoble.com/w/spare-me-kill-the-rest-john-wayne-falbey/1145199187?ean=2940185636992"
+        ]
+      },
+      "kb": {
+        "verified": false,
+        "status": "preserved_author_supplied_direct_link",
+        "provenance": [
+          "website/falbey-sleeping-dogs-site.html",
+          "https://www.kobo.com/us/en/ebook/spare-me-kill-the-rest-1?sId=06002655-564e-4eec-b043-f20836fd6c18&ssId=m5JBlXoen1Lr_geJ9EnSR&cPos=9"
+        ],
+        "note": "Removed tracking query parameters. Kobo blocks automated live checks; existing direct author-supplied product URL retained."
+      },
+      "gp": {
+        "verified": true,
+        "status": "verified_live_product_page",
+        "title": "Spare Me, Kill the Rest by John Wayne Falbey - Books on Google Play",
+        "provenance": [
+          "https://play.google.com/store/books/details?id=LcIDEQAAQBAJ"
+        ]
+      }
+    }
+  }
+}

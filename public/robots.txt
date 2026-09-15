@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /form-handler.php
+Sitemap: https://falbeybooks.com/sitemap.xml

@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import {fileURLToPath} from 'node:url';
+const here=path.dirname(fileURLToPath(import.meta.url));
+const src=fs.readFileSync(path.join(here,'site.html'),'utf8');
+const ctx=vm.createContext({document:{getElementById(){return null}}});
+vm.runInContext(src.slice(src.indexOf('var BOOKS='),src.indexOf('/* ============ stars ============ */')),ctx);
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const pages=[{id:'general'},...ctx.BOOKS.map(b=>({id:b.id,title:b.t,label:'Sleeping Dogs / '+b.code,cover:'/covers/'+b.id+'.jpg',detail:'Explore the series · Read in order'})),{id:'hidden-dragons',title:'Hidden Dragons, Sleeping Dogs',label:'The ninth Sleeping Dogs thriller',cover:'/covers/hidden-dragons-sample-960.webp',detail:'Coming November 2026 · Read Chapter One',sample:true}];
+const dest=path.join(here,'social');fs.mkdirSync(dest,{recursive:true});
+for(const p of pages){
+const style=`*{box-sizing:border-box}html,body{width:1200px;height:630px;margin:0;overflow:hidden}body{background:#0a0d12;color:#e9eaee;font-family:Georgia,serif}.bg-image{position:absolute;inset:0;width:1200px;height:630px;object-fit:cover}.background{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,10,15,.88),rgba(6,10,15,.38))}.border{position:absolute;inset:14px;border:1px solid #c8a44d77}.content{position:absolute;inset:0;padding:65px 80px}.eyebrow{font:20px Consolas,monospace;letter-spacing:5px;text-transform:uppercase;color:#c8a44d;margin:0 0 24px}h1{font-size:66px;line-height:1.1;font-weight:400;margin:0;max-width:740px}h1.book{max-width:690px;font-size:62px}.rule{width:270px;height:3px;background:#d1452f;margin:30px 0 26px}.copy{font-size:31px;line-height:1.32;font-style:italic;color:#b8c1cb}.gold{color:#e8cd8a}.bottom{position:absolute;bottom:52px;left:80px;font:18px Consolas,monospace;letter-spacing:3px;color:#b8c1cb}.cover{position:absolute;right:75px;top:105px;width:285px;height:385px;object-fit:contain;filter:drop-shadow(0 14px 25px #000)}.sample{position:absolute;right:75px;top:505px;width:285px;text-align:center;color:#b8c1cb;font:15px Consolas,monospace;letter-spacing:2px;text-transform:uppercase}.author{font:24px Consolas,monospace;letter-spacing:3px;color:#b8c1cb;margin-top:25px}.bookcol{max-width:670px}.bookcol .copy{font-size:26px;max-width:600px}`;
+let body=p.id==='general'?`<p class="eyebrow">The Sleeping Dogs Thrillers</p><h1>John Wayne<br>Falbey</h1><div class="rule"></div><div class="copy">Nature built them to survive.<br>The government trained them to kill.<br><span class="gold">Then tried to destroy them. Bad move.</span></div><div class="bottom">FALBEYBOOKS.COM &nbsp; // &nbsp; EIGHT NOVELS &nbsp; // &nbsp; THE NINTH IS COMING</div>`:`<div class="bookcol"><p class="eyebrow">${p.label}</p><h1 class="book">${esc(p.title)}</h1><p class="author">JOHN WAYNE FALBEY</p><div class="rule"></div><div class="copy">${p.detail}</div></div><img class="cover" src="${p.cover}" alt="${esc(p.title)} cover">${p.sample?'<div class="sample">Sample cover</div>':''}<div class="bottom">FALBEYBOOKS.COM</div>`;
+fs.writeFileSync(path.join(dest,p.id+'.html'),'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Social preview — '+p.id+'</title><style>'+style+'</style></head><body><img class="bg-image" src="/assets/rainy-night.jpg" alt=""><div class="background"></div><div class="border"></div><div class="content">'+body+'</div></body></html>');
+}
+console.log('Prepared 10 social preview layouts.');
