@@ -110,6 +110,7 @@ for(const page of pages){
 }
 fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+pages.filter(p=>p.route!=='404').map(p=>'<url><loc>'+release.domain+p.url+'</loc><lastmod>'+release.updated+'</lastmod></url>').join('\n')+'\n</urlset>\n');
 fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\nDisallow: /form-handler.php\nSitemap: '+release.domain+'/sitemap.xml\n');
+fs.copyFileSync(path.join(here,'apache.htaccess'),path.join(out,'.htaccess'));
 fs.mkdirSync(path.resolve(here,'../.build'),{recursive:true});
 fs.writeFileSync(path.resolve(here,'../.build/build-manifest.json'),JSON.stringify({builtAt:new Date().toISOString(),domain:release.domain,pages:pages.map(({url,title})=>({url,title})),assetVersion,retailerChecked:'2026-09-15',trailerSHA256:crypto.createHash('sha256').update(fs.readFileSync(path.join(out,'assets/hidden-dragons-helix-trailer.mp4'))).digest('hex')},null,2));
 console.log(`Built ${pages.length} static pages for ${release.domain}; trailer preserved.`);
