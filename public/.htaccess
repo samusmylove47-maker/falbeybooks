@@ -5,6 +5,7 @@ ErrorDocument 404 /404.html
 # Canonical hostname. Bluehost enforces HTTPS; keep validation paths available.
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
   RewriteCond %{HTTP_HOST} ^www\.falbeybooks\.com$ [NC]
   RewriteCond %{REQUEST_URI} !^/\.well-known/(acme-challenge|pki-validation)/ [NC]
   RewriteRule ^ https://falbeybooks.com%{REQUEST_URI} [R=301,L,NE]
