@@ -1,6 +1,6 @@
 # Falbey Books
 
-The approved John Wayne Falbey / Sleeping Dogs author website for **https://falbeybooks.com**. This repository contains the editable source and the prepared website. The chapter page has a centered trailer; its former adjacent sample-cover panel has been removed. The existing Option A Helix trailer is unchanged pending a later video revision.
+The approved John Wayne Falbey / Sleeping Dogs author website for **https://falbeybooks.com**. This repository contains the editable source and the prepared website. The chapter page has a centered trailer; its former adjacent sample-cover panel has been removed. The final 15-second trailer retains the Option A Helix styling, pacing and exact original soundtrack. Its final card now uses the client-selected cover and falbeybooks.com (16 September 2026 revision).
 
 ## Edit and build
 
@@ -40,4 +40,4 @@ Contact/request mail delivery is disabled by default and shows a direct email fa
 
 ## Release facts still pending
 
-The site uses November 2026; the exact day and preorder destinations are not yet supplied. Cover artwork is labeled as a sample where presented. The current promotional trailer remains the approved placeholder. Update these items when the author supplies final materials.
+The site uses November 2026; the exact day and preorder destinations are not yet supplied. Cover artwork is labeled as a sample where presented. The promotional trailer has been revised with the selected cover and falbeybooks.com; its audio and 15-second timeline are preserved. Update these items when the author supplies final materials.
