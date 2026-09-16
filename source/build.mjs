@@ -12,7 +12,7 @@ let template=fs.readFileSync(path.join(here,'site.html'),'utf8');
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 template=template.replace(/maxlength="160"/g,'maxlength="120"')
  .replace('You can also request updates directly by email.','You can also <a href="mailto:wayne@falbeygroup.com">request updates directly by email</a>.')
- .replace('The on-sale date goes to newsletter subscribers first.','Request newsletter updates for the confirmed on-sale date.')
+ .replace('The on-sale date goes to newsletter subscribers first.','Subscribe to the newsletter for the confirmed on-sale date.')
  .replace('the exact on-sale date and final cover reveal go to <a class="inline" href="#/newsletter">newsletter subscribers</a> before they appear anywhere else.','the exact on-sale date and final cover reveal will be shared here and in the <a class="inline" href="#/newsletter">newsletter</a>.');
 let script=template.match(/<script>([\s\S]*?)<\/script>/)[1];
 const dataStart=script.indexOf('var BOOKS=');
@@ -72,7 +72,7 @@ const definitions=[
  ['hidden-dragons','Hidden Dragons, Sleeping Dogs — Coming November 2026','The ninth Sleeping Dogs thriller by John Wayne Falbey. Watch the trailer, explore the new threat, and read the sample chapter.'],
  ['excerpt','Read Chapter One — Hidden Dragons, Sleeping Dogs','Read “Birthplace of Dragons,” Chapter One of the ninth Sleeping Dogs thriller, and watch the promotional trailer. Coming November 2026.'],
  ['appearances','Appearances — John Wayne Falbey','Author appearances, interviews, library programs and book club visits. Contact John Wayne Falbey for booking inquiries.'],
- ['newsletter','Newsletter — John Wayne Falbey','Request occasional release news, author appearances and updates on the Sleeping Dogs thrillers. Subscription requests are confirmed by the author.'],
+ ['newsletter','Newsletter — John Wayne Falbey','Subscribe to John Wayne Falbey’s newsletter for occasional release news, author appearances and updates on the Sleeping Dogs thrillers.'],
  ['about','About John Wayne Falbey','Meet John Wayne Falbey, author of the Sleeping Dogs techno-political thrillers, former attorney and real estate developer.'],
  ['media','Press Kit — John Wayne Falbey','Author biographies, book information, headshot, cover previews and interview contacts for editors, podcast producers and event hosts.'],
  ['contact','Contact — John Wayne Falbey','Contact John Wayne Falbey for reader mail, event proposals, interviews, media and rights inquiries.']

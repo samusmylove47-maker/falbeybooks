@@ -9,6 +9,7 @@ Requirements: Node.js 18+ and PHP 8.2+ for local preview/testing. No npm package
 ```sh
 node source/build.mjs
 php tests/test-form-handler.php
+python tests/test-newsletter.py
 php -S 127.0.0.1:4175 -t public source/preview-router.php
 ```
 
@@ -21,7 +22,7 @@ Open http://127.0.0.1:4175/ for the local preview. Stop the preview with Ctrl+C.
 - `source/apache.htaccess`: Apache access protections, response headers and routing configuration. Edit this source file before rebuilding when host configuration needs to change.
 - `public/`: complete hosting payload, including original media, generated pages, PHP handler and Apache `.htaccess`. Keep these files committed so the repository always contains a deployable version. Add or replace media here, then build.
 - `source/social.mjs`: optional 1200 × 630 social-card layout generator. Run `node source/social.mjs`, then preview `/__review/social/general/`, `/__review/social/sd-01/` through `sd-08/`, or `/__review/social/hidden-dragons/` with the local server. Export the layouts at 1200 × 630 into `public/og-card.png` and `public/assets/social/` when artwork changes. Prepared PNGs are already included; the normal build does not regenerate them.
-- `tests/`: backend validation and no-mail regression tests. `docs/FORMS.md` documents form behavior and host setup.
+- `tests/`: backend validation, no-mail regression tests, and a Python standard-library check comparing the generated Mailchimp forms with the recovered embed. `docs/FORMS.md` documents form behavior and host setup. The newsletter test needs Python 3.9+ and writes its report under ignored `.build/`.
 
 The deployment includes the eight published novels, Book 9 promotion, sample chapter, appearances, newsletter, biography, press and contact pages. Old hash-style links redirect to the corresponding permanent paths.
 
@@ -31,13 +32,15 @@ The deployment includes the eight published novels, Book 9 promotion, sample cha
 
 Before replacing the live site, confirm the document root in Bluehost, preserve an appropriate backup of the current website, and confirm the deployment process targets that domain. There is intentionally no guessed document-root deployment command or automated workflow in this repository.
 
-The supplied Bluehost screen showed an expired SSL certificate. Renew/activate and verify a valid certificate for `falbeybooks.com` and `www.falbeybooks.com` before public launch. DNS must resolve the domain to the Bluehost site containing this payload. Verify HTTPS, root and deep page URLs, a missing-page 404, media playback, retailer links and form fallback after deployment. Enable a canonical HTTPS redirect on the host once the certificate is valid; preserve any existing email-related DNS records.
+The website is live on Bluehost at https://falbeybooks.com. Valid HTTPS for both `falbeybooks.com` and `www.falbeybooks.com`, the canonical www-to-apex redirect, page routes, media playback, file protections and the contact fallback were verified on 16 September 2026. The expired certificate was replaced with an AutoSSL-issued certificate; no DNS records were changed. For each update, preserve a private rollback backup and verify the deployed pages and affected features using normal TLS validation. Keep certificate validation paths and existing email-related DNS records intact.
 
 ## Forms and mailing list
 
-The author has an existing mailing service; its integration is intentionally deferred to a later PR when account details are supplied. Current newsletter submissions are explicitly **manual subscription requests**, never automatic enrollment.
+The homepage and newsletter page now use native HTML POST directly to the author's existing Mailchimp audience. The endpoint and field identifiers were recovered from the public signup form on the [original Google Sites homepage](https://sites.google.com/falbeygroup.com/falbeybookscom/home); no account login, API key, or private credential was needed. The original embed is preserved in [docs/original-mailchimp-embed.html](docs/original-mailchimp-embed.html) for provenance. Existing website styling is retained.
 
-Contact/request mail delivery is disabled by default and shows a direct email fallback. The fixed recipient is `wayne@falbeygroup.com`; the sender is `noreply@falbeybooks.com`. Configure the permitted sender and host mail delivery, then set the server-side environment variable `FALBEY_FORM_TRANSPORT=mail` only when ready to verify delivery. Confirm test messages arrive before describing these forms as operational. Keep credentials out of the repository. See [form setup and tests](docs/FORMS.md) for details.
+Signup opens Mailchimp in a new tab with `noopener`, announced in the form copy. Mailchimp's response is authoritative for validation and any confirmation steps; the site does not claim enrollment on submission or assume a particular opt-in setting. Both forms support native browser validation without JavaScript. Independent local verification passed 78 integration checks against the recovered embed and all 79 existing PHP regression assertions. No actual subscription or real email was sent; completed enrollment remains untested.
+
+Contact mail delivery remains disabled and shows a direct email fallback. The fixed recipient is `wayne@falbeygroup.com`; the sender is `noreply@falbeybooks.com`. Configure the permitted sender and host mail delivery, then set the server-side environment variable `FALBEY_FORM_TRANSPORT=mail` only when ready to verify contact delivery. This setting does not affect Mailchimp signup. The PHP handler retains its old manual newsletter-request branch for backward compatibility, but neither public signup form uses it. Keep credentials out of the repository. See [form setup and tests](docs/FORMS.md) for details.
 
 ## Release facts still pending
 

@@ -170,14 +170,13 @@
       <div class="tile t-4 rv spot">
         <div class="t-lab">Secure channel</div>
         <h3 style="font-size:24px">The newsletter</h3>
-        <p style="font-size:14.5px">Occasional, and not obnoxiously frequent. Request news about upcoming releases.</p>
-        <form class="mini-form" name="newsletter" method="POST" action="/form-handler.php" data-form data-msg="m1" novalidate>
-          <input type="hidden" name="form-name" value="newsletter">
-          <p class="hp" aria-hidden="true"><label>Skip <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-          <input type="email" name="email" required autocomplete="email" maxlength="254" placeholder="your@email.com" aria-label="Email address">
-          <button class="btn btn-p" type="submit">Request updates</button>
+        <p style="font-size:14.5px">Occasional, and not obnoxiously frequent. Subscribe for news about upcoming releases.</p>
+        <form class="mini-form" name="newsletter-home" method="POST" action="https://johnwaynefalbey.us8.list-manage.com/subscribe/post?u=beac98e8cf6ffad5c4d0118d6&amp;id=8c5c967b5c&amp;f_id=00345ae0f0" target="_blank" rel="noopener" aria-describedby="newsletter-home-note">
+          <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="b_beac98e8cf6ffad5c4d0118d6_8c5c967b5c" tabindex="-1" autocomplete="off" value=""></label></p>
+          <input type="email" name="EMAIL" required autocomplete="email" maxlength="254" placeholder="your@email.com" aria-label="Email address">
+          <button class="btn btn-p" type="submit" name="subscribe" value="Subscribe">Subscribe</button>
         </form>
-        <p class="formnote" id="m1" role="status"></p><p class="fineprint">A subscription request; enrollment is confirmed by the author.</p>
+        <p class="fineprint" id="newsletter-home-note">Complete signup with Mailchimp in a new tab. Unsubscribe at any time.</p>
       </div>
     </div>
   </section>
