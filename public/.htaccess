@@ -2,6 +2,14 @@ DirectoryIndex index.html
 Options -Indexes
 ErrorDocument 404 /404.html
 
+# Canonical hostname. Bluehost enforces HTTPS; keep validation paths available.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.falbeybooks\.com$ [NC]
+  RewriteCond %{REQUEST_URI} !^/\.well-known/(acme-challenge|pki-validation)/ [NC]
+  RewriteRule ^ https://falbeybooks.com%{REQUEST_URI} [R=301,L,NE]
+</IfModule>
+
 # Protect historical submission logs and accidentally uploaded configuration.
 <FilesMatch "(?i)(^\.|\.(log|ini|toml|bak|sql)$|^error_log$|^form-submissions\.txt$|^composer\.(json|lock)$)">
   Require all denied
@@ -23,5 +31,4 @@ ErrorDocument 404 /404.html
   </FilesMatch>
 </IfModule>
 
-# HTTPS enforcement and canonical www redirects are enabled during deployment
-# only after Bluehost has renewed and verified the falbeybooks.com certificate.
+# Bluehost's HTTPS enforcement and the site's SSL certificate are host-managed.
