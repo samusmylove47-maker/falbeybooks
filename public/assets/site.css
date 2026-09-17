@@ -360,6 +360,9 @@ h1.hero-h .ln:nth-child(3)>span{animation-delay:.49s}
 .hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
   margin-top:10px;transition:opacity .4s}
 .file:hover .hint,.file:focus-visible .hint,.file:focus-within .hint,.file.open .hint{opacity:.45}
+.file.file-upcoming .file-cov img{filter:none;transform:none}
+.file-upcoming .hint{color:var(--brass)}
+.file-upcoming .file-act{min-height:40px}
 
 /* ---------- monument ---------- */
 .monument{position:relative;overflow:hidden;border-radius:var(--r);
@@ -534,18 +537,19 @@ blockquote cite{font-family:var(--mono);font-style:normal;font-size:10px;letter-
 
 /* cipher */
 .cipher{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:20px var(--pad);text-align:center;cursor:pointer;overflow:hidden;
+  padding:12px var(--pad) 16px;text-align:center;cursor:pointer;overflow:hidden;
   background:linear-gradient(90deg,rgba(200,164,77,.05),transparent 30%,transparent 70%,rgba(209,69,47,.05))}
-.cipher{width:100%;border-left:0;border-right:0;font:inherit;display:block;color:inherit}
-.cipher .k{position:absolute;top:6px;left:var(--pad);font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;
+.cipher{width:100%;border-left:0;border-right:0;font:inherit;display:grid;color:inherit;
+  grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:center}
+.cipher .k{grid-column:1/-1;text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--dim)}
-.cipher .cta{position:absolute;top:6px;right:var(--pad);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+.cipher .cta{grid-area:2/2;justify-self:end;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--brass);border:1px solid rgba(200,164,77,.45);border-radius:999px;padding:4px 11px}
 .cipher:hover .cta,.cipher.dec .cta{background:rgba(200,164,77,.14)}
-.cipher .ct,.cipher .pt{display:block;font-family:var(--mono);font-size:clamp(9px,1.3vw,12px);
+.cipher .ct,.cipher .pt{display:block;grid-area:2/1;min-width:0;overflow-wrap:anywhere;font-family:var(--mono);font-size:clamp(9px,1.3vw,12px);
   letter-spacing:.3em;transition:opacity .5s}
-.cipher .ct{color:#5b6675;margin-top:6px}
-.cipher .pt{position:absolute;left:var(--pad);right:var(--pad);top:50%;transform:translateY(-30%);opacity:0;color:var(--brass)}
+.cipher .ct{color:#5b6675}
+.cipher .pt{opacity:0;color:var(--brass)}
 .cipher:hover .ct,.cipher.dec .ct{opacity:0}
 .cipher:hover .pt,.cipher.dec .pt{opacity:1}
 

@@ -381,6 +381,9 @@ h1.hero-h .ln:nth-child(3)>span{animation-delay:.49s}
 .hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
   margin-top:10px;transition:opacity .4s}
 .file:hover .hint,.file:focus-visible .hint,.file:focus-within .hint,.file.open .hint{opacity:.45}
+.file.file-upcoming .file-cov img{filter:none;transform:none}
+.file-upcoming .hint{color:var(--brass)}
+.file-upcoming .file-act{min-height:40px}
 
 /* ---------- monument ---------- */
 .monument{position:relative;overflow:hidden;border-radius:var(--r);
@@ -555,18 +558,19 @@ blockquote cite{font-family:var(--mono);font-style:normal;font-size:10px;letter-
 
 /* cipher */
 .cipher{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:20px var(--pad);text-align:center;cursor:pointer;overflow:hidden;
+  padding:12px var(--pad) 16px;text-align:center;cursor:pointer;overflow:hidden;
   background:linear-gradient(90deg,rgba(200,164,77,.05),transparent 30%,transparent 70%,rgba(209,69,47,.05))}
-.cipher{width:100%;border-left:0;border-right:0;font:inherit;display:block;color:inherit}
-.cipher .k{position:absolute;top:6px;left:var(--pad);font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;
+.cipher{width:100%;border-left:0;border-right:0;font:inherit;display:grid;color:inherit;
+  grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:center}
+.cipher .k{grid-column:1/-1;text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--dim)}
-.cipher .cta{position:absolute;top:6px;right:var(--pad);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+.cipher .cta{grid-area:2/2;justify-self:end;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--brass);border:1px solid rgba(200,164,77,.45);border-radius:999px;padding:4px 11px}
 .cipher:hover .cta,.cipher.dec .cta{background:rgba(200,164,77,.14)}
-.cipher .ct,.cipher .pt{display:block;font-family:var(--mono);font-size:clamp(9px,1.3vw,12px);
+.cipher .ct,.cipher .pt{display:block;grid-area:2/1;min-width:0;overflow-wrap:anywhere;font-family:var(--mono);font-size:clamp(9px,1.3vw,12px);
   letter-spacing:.3em;transition:opacity .5s}
-.cipher .ct{color:#5b6675;margin-top:6px}
-.cipher .pt{position:absolute;left:var(--pad);right:var(--pad);top:50%;transform:translateY(-30%);opacity:0;color:var(--brass)}
+.cipher .ct{color:#5b6675}
+.cipher .pt{opacity:0;color:var(--brass)}
 .cipher:hover .ct,.cipher.dec .ct{opacity:0}
 .cipher:hover .pt,.cipher.dec .pt{opacity:1}
 
@@ -873,16 +877,16 @@ button[disabled]{cursor:wait;opacity:.65}
 <!-- ================= SERIES ================= -->
 <div class="view" data-route="series">
   <div class="wrap page-h">
-    <div class="lab">Case files SD-01 &ndash; SD-08</div>
+    <div class="lab">Case files SD-01 &ndash; SD-09</div>
     <h1 id="page-title">The series</h1>
-    <p class="sub">Each novel stands on its own, but the files reward being read in sequence &mdash; loyalties shift, enemies survive, and the past has a long reach. Hover any file to declassify it, or open it for the full synopsis and every retailer.</p>
+    <p class="sub">Each novel stands on its own, but the files reward being read in sequence &mdash; loyalties shift, enemies survive, and the past has a long reach. Declassify the eight published files, then get a first look at SD-09: coming November 2026, with Chapter One available now.</p>
   </div>
   <div class="wrap band" style="padding-top:20px">
     <div class="files" id="filesAll"></div>
     <div class="tile rv" style="margin-top:28px">
       <div class="t-lab">Also by John Wayne Falbey</div>
       <h3 style="font-size:26px">Two stand-alone thrillers</h3>
-      <p style="margin-bottom:20px">Outside the Sleeping Dogs series &mdash; and every bit as unsparing. Ten novels in all.</p>
+      <p style="margin-bottom:20px">Outside the Sleeping Dogs series &mdash; and every bit as unsparing. Ten published novels in all.</p>
       <div class="standalones">
         <div class="sa">
           <h4>The Quixotics</h4>
@@ -1365,7 +1369,19 @@ function card(b){
       +'</div>'
     +'</div></article>';
 }
-function fill(id,list){var el=document.getElementById(id);if(el&&!el.dataset.done){el.innerHTML=list.map(card).join('');el.dataset.done='1'}}
+// The upcoming release has a permanent series slot but is not a published BOOKS entry.
+function upcomingCard(){
+  return '<article class="file file-upcoming rv" data-file="sd-09" aria-label="Hidden Dragons, Sleeping Dogs, case file SD-09, coming November 2026">'
+    +'<span class="tab">SD-09</span>'
+    +'<div class="file-cov"><img src="covers/sd-09.webp" width="1024" height="1536" alt="Hidden Dragons, Sleeping Dogs cover: opposing soldiers and a red dragon DNA helix" loading="lazy">'
+      +'<span class="file-yr">NOV 2026</span></div>'
+    +'<div class="file-body"><h3>Hidden Dragons, Sleeping Dogs</h3>'
+      +'<p class="file-hook">The ninth Sleeping Dogs thriller is coming. Get an early look with &ldquo;Birthplace of Dragons,&rdquo; the opening chapter.</p>'
+      +'<p class="hint">Coming soon &middot; November 2026</p>'
+      +'<div class="file-act"><a class="file-open" href="#/excerpt/chapter-one" aria-label="Read Chapter One of Hidden Dragons, Sleeping Dogs">Read Chapter One <span aria-hidden="true">&rarr;</span></a></div>'
+    +'</div></article>';
+}
+function fill(id,list){var el=document.getElementById(id);if(el&&!el.dataset.done){el.innerHTML=list.map(card).join('')+(id==='filesAll'?upcomingCard():'');el.dataset.done='1'}}
 
 /* ============ book page ============ */
 function renderBook(id){
